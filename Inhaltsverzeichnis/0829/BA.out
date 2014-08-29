@@ -1,0 +1,8 @@
+\BOOKMARK [1][-]{section.1}{Inhalt}{}% 1
+\BOOKMARK [1][-]{section.2}{Einf\374hrung und Motivation}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Optimale Kontrolle}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Berechnung der Wertefunktion}{section.2}% 4
+\BOOKMARK [1][-]{section.3}{Niedring-Rang-Appriximation einer Matrix}{}% 5
+\BOOKMARK [2][-]{subsection.3.1}{Singul\344rwertzerlegung \(SVD\)}{section.3}% 6
+\BOOKMARK [2][-]{subsection.3.2}{CX-Zerlegung}{section.3}% 7
+\BOOKMARK [2][-]{subsection.3.3}{CUR-Zerlegung}{section.3}% 8

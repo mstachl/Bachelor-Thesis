@@ -1,0 +1,55 @@
+\begin{thebibliography}{}
+
+\bibitem[\protect\citename{Deuflhard \& Hohmann, }2008]{deuflhard2008}
+Deuflhard, Peter, \& Hohmann, Andreas. 2008.
+\newblock {\em Numerische mathematik 1: Eine algorithmisch orientierte
+  einf{\"u}hrung}. 4. {\"u}berarb. u. erw. aufl edn.
+\newblock de Gruyter Lehrbuch.
+\newblock Berlin u.a.: de Gruyter.
+
+\bibitem[\protect\citename{Dijkstra, }1959]{Dijkstra59}
+Dijkstra, E.W. 1959.
+\newblock {\em A note on two problems in connection with graphs}.
+
+\bibitem[\protect\citename{Drineas \& Kannan, }2003]{drineas2003}
+Drineas, Petros, \& Kannan, R. 2003.
+\newblock Pass efficient algorithms for approximating large matrices.
+\newblock {\em Proc. of the 14th annual acm-siam symposium on discrete
+  algorithms (soda)},  223--232.
+
+\bibitem[\protect\citename{Drineas {\em et~al.\ }\relax, }2009]{Drineas2009}
+Drineas, Petros, Mahoney, Michael~W., \& Muthukrishnan, S. 2009.
+\newblock Relative-error cur matrix decompositions.
+\newblock {\em Siam journal on matrix analysis and applications}, {\bf 30}(3),
+  844--881.
+
+\bibitem[\protect\citename{Golub \& {Van~Loan,~Charles~F}, }2013]{Golub2013}
+Golub, Gene~H., \& {Van~Loan,~Charles~F}. 2013.
+\newblock {\em Matrix computations}. 4. ed. edn.
+\newblock Johns Hopkins studies in the mathematical sciences.
+\newblock Baltimore: Johns Hopkins Univ Press.
+
+\bibitem[\protect\citename{Gr{\"u}ne \& Junge, }2005]{Grune2005}
+Gr{\"u}ne, Lars, \& Junge, Oliver. 2005.
+\newblock A set oriented approach to optimal feedback stabilization.
+\newblock {\em Systems {\&} control letters}, {\bf 54}(2), 169.
+
+\bibitem[\protect\citename{Junge \& Osinga, }2004]{Junge2004}
+Junge, O., \& Osinga, H.~M. 2004.
+\newblock A set oriented approach to global optimal control.
+\newblock {\em Control, optimisation and calculus of variations : Cocv}, {\bf
+  10 (2004)}, 259--270.
+
+\bibitem[\protect\citename{Mahoney \& Drineasb, }2008]{mahoney2008}
+Mahoney, Michael~W., \& Drineasb, Petros. 2008.
+\newblock Cur matrix decompositions for improved data analysis.
+\newblock {\em Pnas}, {\bf 2009}(vol. 106), 697--702.
+
+\bibitem[\protect\citename{Wang \& Zang, }2013]{Wang2013}
+Wang, Shusen, \& Zang, Zhihua. 2013.
+\newblock Improving cur matrix decomposition and the nystr{\"o}m approximation
+  via adaptive sampling.
+\newblock {\em Journal of machine learning research}, {\bf 2013}(14),
+  2729--2769.
+
+\end{thebibliography}

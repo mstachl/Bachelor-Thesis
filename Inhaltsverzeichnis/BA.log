@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/W32TeX) (format=pdflatex 2014.5.23)  29 AUG 2014 14:37
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/W32TeX) (format=pdflatex 2014.5.23)  30 AUG 2014 16:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -874,22 +874,27 @@ Package babel Info: Redefining ngerman shorthand "|
 Package babel Info: Redefining ngerman shorthand "~
 (babel)             in language  on input line 363.
  [6]
-Overfull \hbox (40.07591pt too wide) in paragraph at lines 372--381
+Underfull \hbox (badness 10000) in paragraph at lines 367--371
+
+ []
+
+
+Overfull \hbox (40.07591pt too wide) in paragraph at lines 377--386
 [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 384--388
+Underfull \hbox (badness 10000) in paragraph at lines 389--393
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 384--388
+Underfull \hbox (badness 10000) in paragraph at lines 389--393
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 384--388
+Underfull \hbox (badness 10000) in paragraph at lines 389--393
 
  []
 
@@ -897,48 +902,48 @@ Underfull \hbox (badness 10000) in paragraph at lines 384--388
 Overfull \vbox (8.33331pt too high) has occurred while \output is active []
 
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 389.
+(babel)             in language  on input line 394.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 389.
+(babel)             in language  on input line 394.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 389.
+(babel)             in language  on input line 394.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 389.
+(babel)             in language  on input line 394.
 
 [7]
 Overfull \vbox (8.2pt too high) has occurred while \output is active []
 
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 395.
+(babel)             in language  on input line 400.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 395.
+(babel)             in language  on input line 400.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 395.
+(babel)             in language  on input line 400.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 395.
+(babel)             in language  on input line 400.
  [8]
 (./BA.bbl)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 397.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 402.
 
 Overfull \vbox (8.2pt too high) has occurred while \output is active []
 
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 397.
+(babel)             in language  on input line 402.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 397.
+(babel)             in language  on input line 402.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 397.
+(babel)             in language  on input line 402.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 397.
+(babel)             in language  on input line 402.
  [9]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 397.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 402.
 
 (./BA.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 397.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 397.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 402.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 402.
 Package rerunfilecheck Info: File `BA.out' has not changed.
 (rerunfilecheck)             Checksum: 763BD8E35208C3C98568111EE713A34F;527.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 397.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 402.
  ) 
 Here is how much of TeX's memory you used:
  7729 strings out of 493308
@@ -964,10 +969,10 @@ ic/amsfonts/cm/cmti12.pfb><c:/texlive/2013/texmf-dist/fonts/type1/public/double
 stroke/dsrom12.pfb><c:/texlive/2013/texmf-dist/fonts/type1/public/doublestroke/
 dsrom8.pfb><c:/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm
 10.pfb>
-Output written on BA.pdf (13 pages, 225163 bytes).
+Output written on BA.pdf (13 pages, 225559 bytes).
 PDF statistics:
- 252 PDF objects out of 1000 (max. 8388607)
- 211 compressed objects within 3 object streams
+ 253 PDF objects out of 1000 (max. 8388607)
+ 212 compressed objects within 3 object streams
  53 named destinations out of 1000 (max. 500000)
  80 words of extra memory for PDF output out of 10000 (max. 10000000)
 

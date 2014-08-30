@@ -366,6 +366,11 @@ Da diese Matrizen je nach Parameter ziemlich groß werden können, sollen sie ap
 			||V-V'||_F\leq (2+\epsilon )||V-V_k||_F
 		\end{equation*}		
 		mit hoher Wahrscheinlichkeit (m.h.W.) (vgl. \citep{mahoney2008}). \newline
+		\newline
+		Die Rate $(2+\epsilon)$ kann mit einer Variation des Algorithmus' noch weiter verbessert werden \citep{Drineas2009}. Bei dieser Methode wird die Matrix $R$ abhängig von den für die Matrix $C$ gewählten Zeilen berechnet. Durch diese Abwandlung verringert sich der Fehler m.h.W. zu
+		\begin{equation*}
+			||V-CUR||_F\leq (1+\epsilon)||V-V_k||_F
+		\end{equation*}
 		Dies ist nur eine Möglichkeit eine approximative $CUR$-Zerlegung der Matrix $V$ zu finden. Weitere werden in 
 		folgender Tabelle gezeigt: \newline
 		\begin{figure}[h]

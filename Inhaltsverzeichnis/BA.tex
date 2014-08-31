@@ -28,7 +28,7 @@
 \setlength{\headheight}{0pt}
 
 \pagestyle{headings}
-\bibliographystyle{authordate2}
+\bibliographystyle{plaindin}
 
 
 
@@ -361,7 +361,9 @@ Da diese Matrizen je nach Parameter ziemlich groß werden können, sollen sie ap
 			\item Wende COLUMNSELECT auf $A^T$ an mit $r=\mathcal{O}(k \log \frac{k}{\epsilon^2})$ und berechne somit die Matrix $R$
 			\item Definiere die Matrix $U$ als $U=C^+AR^+$, wobei $X^+$ die Moore-Penrose-Inverse von X ist
 		\end{enumerate}
-		Die so konstruierte approximative Matrix $V'=CUR$ erfüllt nun, dass
+		Die Wahrscheinlichkeit für die Auswahl einer der $c$ Zeilen bzw. $r$ Reihen erfolgt dabei proportional zur Einflussrate der entsprechenden Matrixeinträge. \newline
+		\newline
+		Die mithilfe des Algorithmus' konstruierte approximative Matrix $V'=CUR$ erfüllt nun, dass
 		\begin{equation*}
 			||V-V'||_F\leq (2+\epsilon )||V-V_k||_F
 		\end{equation*}		
@@ -390,7 +392,9 @@ Da diese Matrizen je nach Parameter ziemlich groß werden können, sollen sie ap
 		\newline
 		\textbf{Nachteil:} Die approximierende Matrix ist nicht mehr von der Form \ref{eq:approx}. \newline
 		\newline
-	
+\section{Berechnung der CUR-Zerlegung}
+	Die numerische Berechnung der approximativen Matrix $C'=CUR$ wird in $R$\footnote{R Version 3.1.1, Script ausgeführt mithilfe RStudio Version 0.98.1017} durchgeführt. Dafür wird ein auf Drineas und Mahoney \citep{mahoney2008} basierter Algorithmus \citep{bodor2012} verwendet. \newline
+	Die besten Ergebnisse wurden mit der Methode \textit{ortho.top.scores} erreicht. Bei dieser Variation des Algorithmus' werden die Spalten und Zeilen aufgrund der Linearkombination aus Einflusswert und "maximaler Orthogonalität" der Spalten bzw. Zeilen zueinander ausgewählt.
 	\newpage
 \section*{Abkürzungen}
 	\begin{tabular}{ll}

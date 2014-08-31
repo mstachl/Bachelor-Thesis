@@ -7,3 +7,4 @@
 \contentsline {subsection}{\numberline {3.1}Singul\IeC {\"a}rwertzerlegung (SVD)}{4}{subsection.3.1}
 \contentsline {subsection}{\numberline {3.2}CX-Zerlegung}{5}{subsection.3.2}
 \contentsline {subsection}{\numberline {3.3}CUR-Zerlegung}{5}{subsection.3.3}
+\contentsline {section}{\numberline {4}Berechnung der CUR-Zerlegung}{7}{section.4}

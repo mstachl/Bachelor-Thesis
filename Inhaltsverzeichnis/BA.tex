@@ -30,7 +30,8 @@
 \pagestyle{headings}
 \bibliographystyle{plaindin}
 
-
+\usepackage[tableposition=top]{caption}
+\captionsetup{font={footnotesize}}
 
 \newtheorem{Satz}{Satz}[section]
 % Ein sog. "Theorem" mit Abkuerzung "Satz" (das erste "Satz")
@@ -116,32 +117,10 @@ Daf"ur ist hier Platz.
 \pagenumbering{arabic}
 \pagestyle{headings}
 
-\section{Inhalt}
-Und los geht's
-\begin{itemize}
-	\item Optimale Kontrolle/Optimales Feedback (Einführung)
-		\begin{itemize}
-			\item set oriented approach
-			\item Konstruktion der Wertefunktion
-			\item Optimalitätsprinzip Bellman (Dynamic Programming (vgl \cite{mahoney2008}))
-		\end{itemize}
-	\item Niedrig-Rank-Approximation einer Matrix
-		\begin{itemize}
-			\item SVD
-			\item CUR
-			\item CX
-			\item Vorteile Nachteile
-		\end{itemize}
-	\item CUR Decomp
-		\begin{itemize}
-			\item Rating der Spalten/Zeilen
-			\item Algo
-		\end{itemize}
-	\item Ausblick: NNCUR NNCX
-	\item Fallbeispiel invertiertes Pendel
-\end{itemize}
+\section{Einführung}
+Eventuell noch einfügen: NNCUR, NNCX
+
 \section{Einführung und Motivation}
-	Die Vorarbeit und Basis zu dieser Arbeit besteht im Wesentlichen aus den beiden Papern...
 	\subsection{Optimale Kontrolle}
 	Gegeben sei das Problem der optimalen Stabilisierung eines (instabilen) diskreten Systems
 	\begin{equation}
@@ -175,7 +154,8 @@ Und los geht's
 		V(x)=\inf_{u\in U^{\mathds{N}}}J(x,u)
 	\end{equation}
 	\subsection{Berechnung der Wertefunktion}
-	Im Folgenden soll nun die zuvor definierte optimale Wertefunktion \ref{eq:valuefunction} numerisch berechnet werden. Hierzu wird das \textit{Optimalitätsprinzip nach Bellman} (vgl. \cite{deuflhard2008}) zu Hilfe genommen:
+	\label{sec:valuef}
+	Im Folgenden soll die zuvor definierte optimale Wertefunktion \ref{eq:valuefunction} numerisch berechnet werden. Hierzu wird das \textit{Optimalitätsprinzip nach Bellman} (vgl. \cite{deuflhard2008}) zu Hilfe genommen:
 	\begin{equation}
 		\label{eq:bellman}
 		V(x)=\inf_{u\in U^{\mathds{N}}}\{q(x,u)+V(f(x,u)\}
@@ -225,7 +205,37 @@ Und los geht's
 		\caption{Umformung des Boxplots in Matrixform}
 	\end{figure}
 	\\
-Da diese Matrizen je nach Parameter ziemlich groß werden können, sollen sie approximiert werden. Im nächsten Kapitel werden diverse Approximationsmethoden vorgestellt.
+	Da diese Matrizen je nach Parameter ziemlich groß werden können, sollen sie approximiert werden. Im nächsten 
+	Kapitel werden diverse Approximationsmethoden vorgestellt.
+	\subsection{Beispiel: das invertierte Pendel}
+	Als Beispiel dient das Modell des invertierten Pendels auf einem Wagen. Bei diesem Modell wird ein starres 
+	invertiertes Pendel rotationsfähig auf einem Wagen montiert. Beide Körper, Pendelmasse und Wagen, werden als 
+	konzentrierte Punktmassen angenommen. Zur Balancierung des Pendels können Kräfte $u$ auf den Wagen angewandt 
+	werden um ihn in der Horizontalen zu stabilisieren. Die Dynamik des Wagens wird in diesem Modell vernachlässigt, 
+	stattdessen konzentriert man sich auf den Auslenkungswinkel $\varphi$ des Pendels von der Vertikalen und auf die 
+	Winkelgeschwindigkeit $\dot{\varphi}$ im Zustandsraum $(\varphi,\dot{\varphi})\in \mathds{R}^2$. \\
+	Das Pendel befindet sich im höchsten Punkt in einer instabilen Ruhelage. Verlässt es diese Ruhelage um einen 
+	Winkel $\varphi$, so muss dem Pendel wieder Energie hinzugefügt werden um es wieder in den Zustand der instabilen 
+	Ruhelage zurückgeführt werden kann. Das mathematische System zu dieser Zustandsrückführung definiert sich 
+	wiefolgt (vgl. \citep{Grune2005}):
+	\begin{eqnarray}
+		\dot{x_1} &=& x_2 \\
+		\dot{x_2} &=& \frac{\frac{g}{l}\sin (x_1)-\frac{1}{2}m_rx_2^2\sin (2x_1)-\frac{m_r}{ml}\cos (x_1)u}{\frac{4}{3}-m_r\cos ^2(x_1)}
+	\end{eqnarray}
+	wobei $x_1=\varphi$, $x_2=\dot{\varphi}$, $m_r=\frac{m}{m+M}$ das Massenverhältniss zwischen Pendelmasse und 
+	Wagenmasse, $m=2kg$, $M=8kg$, $l=0.5m$ Länge des Pendels und $g=9.8\frac{m}{s^2}$ die Gravitationskonstante. \\
+	Die schrittweisen Stabilisierungskosten des inversen Pendels ergeben sich aus
+	\begin{equation}
+		q(x,u)=\frac{1}{2}(0.1x_1^2+0.05x_2^2+0.01u^2).
+	\end{equation}
+	Berechnet man auf Basis dieses mathematischen Modells nun die Wertefunktion $V_\mathcal{P}$ wie in 
+	\ref{sec:valuef} definiert, so ergibt sich folgendes Bild:
+	\begin{figure}[h]
+		\center
+		\includegraphics[scale=0.55]{valuefunction_plot_256.jpg}
+		\caption{Approximierte Wertefunktion $V\mathcal{P}$ bei Simulationstiefe 16}
+	\end{figure}
+	\newpage
 \section{Niedring-Rang-Appriximation einer Matrix}
 	Je nach Tiefe der Simulation bzw. der Dimension des zugrunde liegenden Raumes (vgl. Fluch der Dimension \textbf{Bellman}) können gigantische Matrizen entstehen. Da die gängigen Rechner bei der Speicherung solcher Matrizen schnell an ihre Grenzen stoßen, soll nun für die Wertematrix $V$ eine Niedrig-Rang-Approximation der Form
 	\begin{equation}
@@ -234,7 +244,10 @@ Da diese Matrizen je nach Parameter ziemlich groß werden können, sollen sie ap
 	\end{equation}
 	gefunden werden, wobei $\sigma_i\in \mathds{R}$ Konstanten und $u_i, v_i$ Vektoren im $\mathds{R}^n$ sind. Im Folgenden werden einige Näherungen vorgestellt.
 	\subsection{Singulärwertzerlegung (SVD)}
-		Dies klassische Singulärwertzerlegung .... ... und ist folgendermaßen definiert.		
+		\subsubsection{Definition}
+		Dies klassische Singulärwertzerlegung ist eine Erweiterung der Diagonalisierung von reellen quadratischen 
+		Matrizen auf komplexe $\mathds{R}^{m\times n}$-Matrizen und gerade in der numerischen Mathematik von großem 
+		Nutzen. Sie ist folgendermaßen definiert.		
 		\begin{Definition}
 		Sei A eine komplexe $m\times n$-Matrix von Rang $r$. Die Singulärwertzerlegung von A ist gegeben durch (vgl. 			\cite{deuflhard2008})
 		\begin{equation*}
@@ -270,14 +283,14 @@ Da diese Matrizen je nach Parameter ziemlich groß werden können, sollen sie ap
 		Die Berechnungskosten, die für das Ausführen der Matrixzerlegung benötigt werden, betragen $\mathcal{O}(min(mn^2,m^2n))$ (vgl \cite{mahoney2008}).
 		\newline 
 		\newline
-		Wir wollen die Wertematrix $V$ nun so approximieren, dass der Fehler 
+		Im Folgenden wollen wir die Wertematrix $V$ so approximieren, dass der Fehler 
 		\begin{equation*}
 			e(D)=||V-D||_\xi
 		\end{equation*}
 		bezüglich einer Norm $\xi$ möglichst klein wird für Matrizen $D$ von Rang $rank(D)\leq k$. $\xi=2$ bezeichnet hierbei die 2-Norm ($||A||_2=\left(\sum_{i,j}|a_{ij}|^2\right)^\frac{1}{2}$), $\xi=max$ bezeichnet die Maximumsnorm ($||A||_{max}=\max_{i,j}|a_{ij}|$) und $\xi=F$ verwendet die Frobeniusnorm ($||A||_F=(\sigma_1^2+...+\sigma_r)^\frac{1}{2}$).
 		\newline
-		\newline
-		Die erste Frage, die auftaucht: gibt es eine "beste" Rang-k-Approximation.
+		\subsubsection{Fehlerapproximation}
+		Die erste Frage, die auftaucht, ist die nach der Existenz einer  "besten" Rang-k-Approximation.
 		\begin{Satz}{(Eckart-Young)}
 			Sei eine Matrix $V$ von Rang $r$ gegeben durch \ref{eq:SVD} und $k<r$. Die beste Rang-$k$-Approximation 
 			von $V$, also eine Matrix, die
@@ -299,7 +312,7 @@ Da diese Matrizen je nach Parameter ziemlich groß werden können, sollen sie ap
 		\end{Beweis}
 		Die Kosten der k-Rang-Singulärwertzerlegung betragen $\mathcal{O}(mnk)$ \citep{Wang2013}. \newline
 		\newline
-		\textbf{Nachteil:} Es werden keine konkreten Einträge der ursprünglichen Matrix $V$ verwendet, deswegen......\newline
+		\textbf{Nachteil:} Es werden keine konkreten Einträge der ursprünglichen Matrix $V$ verwendet, weswegen die Singulärwertzerlegung ohne Erweiterungen für unsere Zwecke nicht verwendbar ist.\newline
 		\newline
 		In den nächsten beiden Abschnitten werden zwei Verfahren vorgestellt, welche Spalten und/oder Zeilen der 
 		Eingabematrix verwenden.
@@ -322,7 +335,7 @@ Da diese Matrizen je nach Parameter ziemlich groß werden können, sollen sie ap
 			\in\mathds{R}^{c\times r}$ eine Spalten-Zeilen-basierte Approximation von $V$, beziehungsweise eine $CUR
 			$-Zerlegung von $V$.
 		\end{Definition}
-		Im Folgenden wird ein Verfahren zur Berechnung der $CUR$-Zerlegung von Mahoney und Drineas \citep{mahoney2008} vorgestellt. \newline
+		Im Folgenden wird ein Verfahren zur Berechnung der $CUR$-Zerlegung nach Mahoney und Drineas \citep{mahoney2008} vorgestellt. \newline
 		\newline
 		Besonders kritisch bei der Berechnung der Zerlegung ist, welche Zeilen bzw. Spalten für die Approximation 
 		verwendet werden.
@@ -344,7 +357,8 @@ Da diese Matrizen je nach Parameter ziemlich groß werden können, sollen sie ap
 			\label{eq:score}
 			\pi_j=\frac{1}{k}\sum_{\xi=1}^k(v_j^\xi)^2 \hspace{2cm} j\in [1,n]
 		\end{equation}
-		Diese Einflusswerte bilden eine Wahrscheinlichkeitsverteilung auf den $n$ Spalten und es gilt: $\sum_{j=1}^n\pi_j=1$ und $\pi_j\geq 0$ \newline
+		Er gibt an, wie groß der Einfluss einer Spalte auf die durch die Singulärwertzerlegung definierte "beste" Rang-k-Approximierung $V_k$ ist. \\
+		Diese Einflusswerte bilden eine Wahrscheinlichkeitsverteilung auf den $n$ Spalten und es gilt: $\sum_{j=1}^n\pi_j=1$ und $\pi_j\geq 0$. \newline
 		Das Selektieren der Spalten wird anschließend mithilfe des Algorithmus' COLUMNSELECT (vgl. \citep{mahoney2008}) durchgeführt: \newline
 		\begin{enumerate}
 			\item \textbf{Input:} Matrix $V\in \mathds{R}^{m\times n}$ und Fehlerparameter $\epsilon$
@@ -359,7 +373,7 @@ Da diese Matrizen je nach Parameter ziemlich groß werden können, sollen sie ap
 		\begin{enumerate}
 			\item Wende COLUMNSELECT auf $A$ an mit $c=\mathcal{O}(k \log \frac{k}{\epsilon^2})$ und berechne somit die Matrix $C$
 			\item Wende COLUMNSELECT auf $A^T$ an mit $r=\mathcal{O}(k \log \frac{k}{\epsilon^2})$ und berechne somit die Matrix $R$
-			\item Definiere die Matrix $U$ als $U=C^+AR^+$, wobei $X^+$ die Moore-Penrose-Inverse von X ist
+			\item Definiere die Matrix $U$ als $U=C^+AR^+$, wobei $X^+$ die Moore-Penrose-Inverse \citep{penrose1955} von X ist
 		\end{enumerate}
 		Die Wahrscheinlichkeit für die Auswahl einer der $c$ Zeilen bzw. $r$ Reihen erfolgt dabei proportional zur Einflussrate der entsprechenden Matrixeinträge. \newline
 		\newline
@@ -392,15 +406,40 @@ Da diese Matrizen je nach Parameter ziemlich groß werden können, sollen sie ap
 		\newline
 		\textbf{Nachteil:} Die approximierende Matrix ist nicht mehr von der Form \ref{eq:approx}. \newline
 		\newline
-\section{Berechnung der CUR-Zerlegung}
-	Die numerische Berechnung der approximativen Matrix $C'=CUR$ wird in $R$\footnote{R Version 3.1.1, Script ausgeführt mithilfe RStudio Version 0.98.1017} durchgeführt. Dafür wird ein auf Drineas und Mahoney \citep{mahoney2008} basierter Algorithmus \citep{bodor2012} verwendet. \newline
-	Die besten Ergebnisse wurden mit der Methode \textit{ortho.top.scores} erreicht. Bei dieser Variation des Algorithmus' werden die Spalten und Zeilen aufgrund der Linearkombination aus Einflusswert und "maximaler Orthogonalität" der Spalten bzw. Zeilen zueinander ausgewählt.
+\section{Anwendung der CUR-Zerlegung}
+	Die numerische Berechnung der approximativen Matrix $C'=CUR$ wird in $R$\footnote{R Version 3.1.1, Script ausgeführt mithilfe RStudio Version 0.98.1017} durchgeführt. Dafür wird ein auf Drineas und Mahoney \citep{mahoney2008} basierender Algorithmus \citep{bodor2012} verwendet. \newline
+	Die ursprünglich von Drineas et al. \citep{mahoney2008} veröffentlichte Methode verwendet eine Auswahl an Zeilen 
+	und Spalten der Zielmatrix entsprechend der stochastischen Einflussrate. Dies impliziert einige numerische 
+	Probleme, da die resultierenden Fehler zwischen Zielmatrix und $CUR$-Zerlegung je nach ausgewählten Zeilen/
+	Spalten sehr stark variieren. Aus diesem Grund wurden Berechnungen mit unterschiedlichen Variationen dieser 
+	Methode durchgeführt. \newline
+	Die besten Ergebnisse wurden mit der Methode \textit{ortho.top.scores} erreicht. Bei dieser Variation des Algorithmus' werden die Spalten und Zeilen aufgrund der Linearkombination aus Einflusswert und "maximaler Orthogonalität" der Spalten bzw. Zeilen zueinander ausgewählt. \\
+\subsection{Beispiel: das invertierte Pendel}
+	\begin{figure}[h]
+		\center
+		\includegraphics[scale=0.45]{Rplot_depth10.PNG}
+		\caption{Plot der resultierenden Fehler bei einer 32x32-Matrix (schwarz) Frobeniusnorm (rot) Maximumsnorm}
+	\end{figure}	
+	\begin{figure}[h]
+		\center
+		\includegraphics[scale=0.4]{Rplot_depth16_2.PNG}
+		\caption{Plot der resultierenden Fehler bei einer 256x256-Matrix (schwarz) Frobeniusnorm (rot) Maximumsnorm}
+	\end{figure}	
+	\begin{figure}[h]
+		\center
+		\includegraphics[scale=0.3]{CUR_valuefunctions}
+		\caption{Plot der Wertefunktion bei einer Auswahl von 20 (a) 50 (b) 80 (c) und 120 (d) Spalten und Zeilen bei einer 256x256-Matrix}
+	\end{figure}
 	\newpage
-\section*{Abkürzungen}
-	\begin{tabular}{ll}
-		SVD & Singulärwertzerlegung \\
-		m.h.W. & mit hoher Wahrscheinlichkeit \\
-	\end{tabular}
-\newpage
+	Für die numerische Betrachtung ist es natürlich von unbestreitbarem Interesse zu wissen, wo die größten 
+	Fehler vorkommen. Im Falle, dass die größten Fehler vor allem am Rand des stabilisierbaren Bereiches auftreten 
+	und im Inneren der Matrix gilt, dass $V_{CUR}\approx V_\mathcal{P}$, so können die Fehler am Rand 
+	vernachlässigt und eine ungenauere Approximation verwendet werden. 
+	\begin{figure}[h]
+		\center
+		\includegraphics[scale=0.3]{CUR_fehlerstellen}
+		\caption{Lokalisierung der Stellen der größen Fehler der Wertefunktion bei einer Auswahl von 20 (a) 50 (b) 80 (c) und 120 (d) Spalten und Zeilen bei einer 256x256-Matrix. Zur besseren Übersichtlichkeit wurde die angezeigte Skala auf 0-1 eingeschränkt}
+	\end{figure}
+	\newpage
 \bibliography{BA_lib}
 \end{document}

@@ -65,7 +65,13 @@
 \newblock CUR matrix decompositions for improved data analysis.
 \newblock {In: }\emph{PNAS} 2009 (2008), Nr. vol. 106, S. 697--702
 
-\bibitem[10]{Wang2013}
+\bibitem[10]{penrose1955}
+\textsc{Penrose}, Roger:
+\newblock A generalized inverse for matrices.
+\newblock {In: }\emph{Proceedings of the Cambridge Philosophical Society 51}
+  (1955), S. 406--4013
+
+\bibitem[11]{Wang2013}
 \textsc{Wang}, Shusen ; \textsc{Zang}, Zhihua:
 \newblock Improving CUR Matrix Decomposition and the Nystr{\"o}m Approximation
   via Adaptive Sampling.

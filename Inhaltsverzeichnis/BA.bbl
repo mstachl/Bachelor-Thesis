@@ -7,12 +7,17 @@
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
-\bibitem[1]{bodor2012}
+\bibitem[1]{Bellman1961}
+\textsc{Bellman}, Richard~E.:
+\newblock \emph{Adaptive Conrol Processes}.
+\newblock Princeton : Princeton University Press, 1961
+
+\bibitem[2]{bodor2012}
 \textsc{Bodor}, Andras ; \textsc{Solymosi}, Norbert:
 \newblock \emph{rCUR: an R package for CUR matrix decomposition}.
 \newblock 2012
 
-\bibitem[2]{deuflhard2008}
+\bibitem[3]{deuflhard2008}
 \textsc{Deuflhard}, Peter ; \textsc{Hohmann}, Andreas:
 \newblock \emph{Numerische Mathematik 1: Eine algorithmisch orientierte
   Einf{\"u}hrung}.
@@ -23,59 +28,72 @@
   --
 \newblock ISBN 9783110203554
 
-\bibitem[3]{Dijkstra59}
+\bibitem[4]{Dijkstra59}
 \textsc{Dijkstra}, E.W.:
 \newblock \emph{A Note on Two Problems in Connection with Graphs}.
 \newblock 1959
 
-\bibitem[4]{drineas2003}
+\bibitem[5]{drineas2003}
 \textsc{Drineas}, Petros ; \textsc{Kannan}, R.:
 \newblock Pass Efficient Algorithms for Approximating Large Matrices.
 \newblock {In: }\emph{Proc. of the 14th Annual ACM-SIAM Symposium on Discrete
   Algorithms (SODA)}  (2003), S. 223--232
 
-\bibitem[5]{Drineas2009}
+\bibitem[6]{Drineas2006}
+\textsc{Drineas}, Petros ; \textsc{Kannan}, Ravi  ; \textsc{Mahoney},
+  Michael~W.:
+\newblock Fast Monte Carlo algorithms for matrices III: Computing a compressed
+  approximate matrix decomposition.
+\newblock {In: }\emph{Society for Industrial and Applied Mathematics (SIAM)}
+  (2006), S. 184--206
+
+\bibitem[7]{Drineas2009}
 \textsc{Drineas}, Petros ; \textsc{Mahoney}, Michael~W.  ;
   \textsc{Muthukrishnan}, S.:
 \newblock Relative-Error CUR Matrix Decompositions.
 \newblock {In: }\emph{SIAM journal on matrix analysis and applications} 30
   (2009), Nr. 3, S. 844--881
 
-\bibitem[6]{Golub2013}
-\textsc{Golub}, Gene~H. ; \textsc{{Van~Loan,~Charles~F}}:
+\bibitem[8]{Golub2013}
+\textsc{Golub}, Gene~H. ; \textsc{Van~Loan}, Charles~F.:
 \newblock \emph{Matrix computations}.
 \newblock 4. ed.
 \newblock Baltimore : Johns Hopkins Univ Press, 2013 (Johns Hopkins studies in
   the mathematical sciences). --
 \newblock ISBN 9781421408590
 
-\bibitem[7]{Grune2005}
+\bibitem[9]{Grune2005}
 \textsc{Gr{\"u}ne}, Lars ; \textsc{Junge}, Oliver:
 \newblock A set oriented approach to optimal feedback stabilization.
 \newblock {In: }\emph{Systems {\&} control letters} 54 (2005), Nr. 2, S. 169
 
-\bibitem[8]{Junge2004}
+\bibitem[10]{Junge2004}
 \textsc{Junge}, O. ; \textsc{Osinga}, H.~M.:
 \newblock A set oriented approach to global optimal control.
 \newblock {In: }\emph{Control, optimisation and calculus of variations : COCV}
   10 (2004) (2004), S. 259--270
 
-\bibitem[9]{mahoney2008}
+\bibitem[11]{mahoney2008}
 \textsc{Mahoney}, Michael~W. ; \textsc{Drineasb}, Petros:
 \newblock CUR matrix decompositions for improved data analysis.
 \newblock {In: }\emph{PNAS} 2009 (2008), Nr. vol. 106, S. 697--702
 
-\bibitem[10]{penrose1955}
+\bibitem[12]{penrose1955}
 \textsc{Penrose}, Roger:
 \newblock A generalized inverse for matrices.
 \newblock {In: }\emph{Proceedings of the Cambridge Philosophical Society 51}
   (1955), S. 406--4013
 
-\bibitem[11]{Wang2013}
+\bibitem[13]{Wang2013}
 \textsc{Wang}, Shusen ; \textsc{Zang}, Zhihua:
 \newblock Improving CUR Matrix Decomposition and the Nystr{\"o}m Approximation
   via Adaptive Sampling.
 \newblock {In: }\emph{Journal of Machine Learning Research} 2013 (2013), Nr.
   14, S. 2729--2769
+
+\bibitem[14]{Wiggins1990}
+\textsc{Wiggins}, Stephen:
+\newblock \emph{Introduction to applied nonlinear dynamical systems and chaos}.
+\newblock New York : Springer-Verlag, 1990
 
 \end{thebibliography}

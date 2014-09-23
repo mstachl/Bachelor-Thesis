@@ -11,6 +11,7 @@
 \usepackage{dsfont}
 %\usepackage{ulem}
 \usepackage{color}
+\usepackage{enumerate}
 %\usepackage{cite}
 %\usepackage{natbib}
 \setlength{\voffset}{-28.4mm}
@@ -233,11 +234,14 @@ Eventuell noch einfügen: NNCUR, NNCX
 	\begin{figure}[h]
 		\center
 		\includegraphics[scale=0.55]{valuefunction_plot_256.jpg}
-		\caption{Approximierte Wertefunktion $V\mathcal{P}$ bei Simulationstiefe 16}
+		\caption{Approximierte Wertefunktion $V_\mathcal{P}$ bei Simulationstiefe 16}
 	\end{figure}
 	\newpage
-\section{Niedring-Rang-Appriximation einer Matrix}
-	Je nach Tiefe der Simulation bzw. der Dimension des zugrunde liegenden Raumes (vgl. Fluch der Dimension \textbf{Bellman}) können gigantische Matrizen entstehen. Da die gängigen Rechner bei der Speicherung solcher Matrizen schnell an ihre Grenzen stoßen, soll nun für die Wertematrix $V$ eine Niedrig-Rang-Approximation der Form
+\section{Niedring-Rang-Approximation einer Matrix}
+	Je nach Tiefe der Simulation bzw. der Dimension des zugrunde liegenden Raumes (vgl. \textbf{Fluch der Dimension} 
+	nach Bellman \citep{Bellman1961}) können gigantische Matrizen entstehen. Da die gängigen Rechner bei der 
+	Speicherung solcher Matrizen schnell an ihre Grenzen stoßen, soll nun für die Wertematrix $V$ eine Niedrig-Rang-
+	Approximation der Form
 	\begin{equation}
 		\label{eq:approx}
 		V(x)\approx \sum_{i=1}^k\sigma_i u_i(x) v_i^T(x)
@@ -245,7 +249,7 @@ Eventuell noch einfügen: NNCUR, NNCX
 	gefunden werden, wobei $\sigma_i\in \mathds{R}$ Konstanten und $u_i, v_i$ Vektoren im $\mathds{R}^n$ sind. Im Folgenden werden einige Näherungen vorgestellt.
 	\subsection{Singulärwertzerlegung (SVD)}
 		\subsubsection{Definition}
-		Dies klassische Singulärwertzerlegung ist eine Erweiterung der Diagonalisierung von reellen quadratischen 
+		Die klassische Singulärwertzerlegung ist eine Erweiterung der Diagonalisierung von reellen quadratischen 
 		Matrizen auf komplexe $\mathds{R}^{m\times n}$-Matrizen und gerade in der numerischen Mathematik von großem 
 		Nutzen. Sie ist folgendermaßen definiert.		
 		\begin{Definition}
@@ -280,7 +284,7 @@ Eventuell noch einfügen: NNCUR, NNCX
 			\end{equation*}
 			Die $\sigma_i$ sind dabei die Singulärwerte von $A$ und $u_i$ und $v_i$ die Zeilen von $U$ bzw. $V$.
 		\end{Bemerkung}
-		Die Berechnungskosten, die für das Ausführen der Matrixzerlegung benötigt werden, betragen $\mathcal{O}(min(mn^2,m^2n))$ (vgl \cite{mahoney2008}).
+		Die Berechnungskosten, die für das Ausführen der Matrixzerlegung benötigt werden, betragen $\mathcal{O}(min(mn^2,m^2n))$ (vgl. \cite{mahoney2008}).
 		\newline 
 		\newline
 		Im Folgenden wollen wir die Wertematrix $V$ so approximieren, dass der Fehler 
@@ -310,7 +314,7 @@ Eventuell noch einfügen: NNCUR, NNCX
 		\begin{Beweis}
 			Für einen Beweis siehe \cite{Golub2013}.
 		\end{Beweis}
-		Die Kosten der k-Rang-Singulärwertzerlegung betragen $\mathcal{O}(mnk)$ \citep{Wang2013}. \newline
+		Die Kosten der Rang-k-Singulärwertzerlegung betragen $\mathcal{O}(k(m+n))$ \citep{Drineas2006}. \newline
 		\newline
 		\textbf{Nachteil:} Es werden keine konkreten Einträge der ursprünglichen Matrix $V$ verwendet, weswegen die Singulärwertzerlegung ohne Erweiterungen für unsere Zwecke nicht verwendbar ist.\newline
 		\newline
@@ -352,12 +356,12 @@ Eventuell noch einfügen: NNCUR, NNCX
 			V^j=\sum_{\xi=1}^k(\sigma_\xi u^\xi )v_j^\xi
 		\end{equation*}
 		wobei $u^\xi$ der $\xi$-te linke Singulärvektor und $v_j\xi$ die $j$-te Koordinate des $\xi$-ten rechten 
-		Singulärvektors ist. Der statistische Einflusswert einer Spalte von $V$ kann nun gemessen werden durch
+		Singulärvektors ist. Der \textbf{statistische Einflusswert} einer Spalte von $V$ kann nun gemessen werden durch
 		\begin{equation}
 			\label{eq:score}
 			\pi_j=\frac{1}{k}\sum_{\xi=1}^k(v_j^\xi)^2 \hspace{2cm} j\in [1,n]
 		\end{equation}
-		Er gibt an, wie groß der Einfluss einer Spalte auf die durch die Singulärwertzerlegung definierte "beste" Rang-k-Approximierung $V_k$ ist. \\
+		Er gibt an, wie groß der Einfluss einer Spalte auf die durch die Singulärwertzerlegung definierte "beste" \ Rang-k-Approximation $V_k$ ist. \\
 		Diese Einflusswerte bilden eine Wahrscheinlichkeitsverteilung auf den $n$ Spalten und es gilt: $\sum_{j=1}^n\pi_j=1$ und $\pi_j\geq 0$. \newline
 		Das Selektieren der Spalten wird anschließend mithilfe des Algorithmus' COLUMNSELECT (vgl. \citep{mahoney2008}) durchgeführt: \newline
 		\begin{enumerate}
@@ -440,6 +444,39 @@ Eventuell noch einfügen: NNCUR, NNCX
 		\includegraphics[scale=0.3]{CUR_fehlerstellen}
 		\caption{Lokalisierung der Stellen der größen Fehler der Wertefunktion bei einer Auswahl von 20 (a) 50 (b) 80 (c) und 120 (d) Spalten und Zeilen bei einer 256x256-Matrix. Zur besseren Übersichtlichkeit wurde die angezeigte Skala auf 0-1 eingeschränkt}
 	\end{figure}
+\section{Nach der CUR-Zerlegung}
+	Für die exakte Wertefunktion $V$ gilt nach Bellmann, dass
+	\begin{eqnarray*}
+		V(x_k)&=&\inf_{u\in U^{\mathds{N}}}\{q(x_k,u)+V(f(x_k,u))\} \\
+			&=&q(x_k,u_k^*)+V(f(x_k,u_k^*))
+	\end{eqnarray*}
+	mit dem minimierenden $u_k^*$, falls das Optimum angenommen wird, wobei $V(f(x_k,u))=:V(x_{k+1})$. Da $q(x,u)>0 \hspace{1mm}$ für $x\neq 0$ gilt also insbesondere, dass $V(x_k)>V(x_{k+1})$. \newline
+	\newline
+	Mit dieser Eigenschaft wird die Wertefunktion zu einer \textbf{Lyapunov-Funktion} (siehe \citep{Wiggins1990}), da gilt:
+	\begin{enumerate}
+		\item $V(x)\geq 0$ 
+		\item $V(x)=0 \Leftrightarrow x=0$
+		\item $V(x_k)>V(x_{k+1})$
+	\end{enumerate}
+	Leider ergibt sich bei der approximativen $CUR$-Zerlegung $\tilde{V}$ das Problem, dass die Bedingung (iii) nicht 
+	mehr notwendigerweise erfüllt ist. \\
+	Für den resultieren Fehler berechnet man dazu das \textbf{Residuum} der Bellman-Gleichung. Dieses ist gegeben 
+	durch
+	\begin{equation}
+		R(x)=\tilde{V}(x)-\inf_{u}\{q(x,u)+\tilde{V}(f(x,u))\}.
+	\end{equation}
+	mit
+	\begin{equation}
+		\tilde{u}(x)=argmin_{u\in U^{\mathds{N}}}\{q(x,u)+\tilde{V}(f(x,u)\}
+	\end{equation}
+	Im Falle des Erfüllens der Bedingung (iii) ergibt sich
+	\begin{equation}
+		R(x)\geq 0 \hspace{1cm}\forall x\in X
+	\end{equation}
+	da $q(x,u)\geq0$ für alle $x\in X$. \\
+	Typischerweise ist diese Bedingung aber nicht für alle $x\in X$ erfüllt. Als alternative Formulierung soll 
+	deshalb die Menge $\bar{S}=\{x\in X| R(x)<0\}$ bezüglich des Lebesque-Maßes möglichst geringes Volumen besitzen.
+\section{Ausblick und Diskussion}
 	\newpage
 \bibliography{BA_lib}
 \end{document}

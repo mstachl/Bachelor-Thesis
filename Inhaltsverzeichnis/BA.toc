@@ -10,7 +10,10 @@
 \contentsline {subsubsection}{\numberline {3.1.2}Fehlerapproximation}{5}{subsubsection.3.1.2}
 \contentsline {subsection}{\numberline {3.2}CX-Zerlegung}{6}{subsection.3.2}
 \contentsline {subsection}{\numberline {3.3}CUR-Zerlegung}{6}{subsection.3.3}
-\contentsline {section}{\numberline {4}Anwendung der CUR-Zerlegung}{8}{section.4}
-\contentsline {subsection}{\numberline {4.1}Beispiel: das invertierte Pendel}{9}{subsection.4.1}
-\contentsline {section}{\numberline {5}Nach der CUR-Zerlegung}{10}{section.5}
-\contentsline {section}{\numberline {6}Ausblick und Diskussion}{11}{section.6}
+\contentsline {subsubsection}{\numberline {3.3.1}Definition}{6}{subsubsection.3.3.1}
+\contentsline {subsubsection}{\numberline {3.3.2}Spaltenselektion anhand der 2-Norm}{7}{subsubsection.3.3.2}
+\contentsline {subsubsection}{\numberline {3.3.3}Spaltenselektion anhand des statistischen Einflusswertes}{8}{subsubsection.3.3.3}
+\contentsline {section}{\numberline {4}Anwendung der CUR-Zerlegung}{11}{section.4}
+\contentsline {subsection}{\numberline {4.1}Beispiel: das invertierte Pendel}{11}{subsection.4.1}
+\contentsline {section}{\numberline {5}Nach der CUR-Zerlegung}{12}{section.5}
+\contentsline {section}{\numberline {6}Ausblick und Diskussion}{13}{section.6}

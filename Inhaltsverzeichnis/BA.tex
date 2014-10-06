@@ -206,8 +206,8 @@ Eventuell noch einfügen: NNCUR, NNCX
 		\caption{Umformung des Boxplots in Matrixform}
 	\end{figure}
 	\\
-	Da diese Matrizen je nach Parameter ziemlich groß werden können, sollen sie approximiert werden. Im nächsten 
-	Kapitel werden diverse Approximationsmethoden vorgestellt.
+	Da diese Matrizen je nach Parameter ziemlich groß werden können, sollen sie approximiert werden. Nach der Darstellung eines Beispiels werden im nächsten 
+	Kapitel diverse Approximationsmethoden vorgestellt.
 	\subsection{Beispiel: das invertierte Pendel}
 	Als Beispiel dient das Modell des invertierten Pendels auf einem Wagen. Bei diesem Modell wird ein starres 
 	invertiertes Pendel rotationsfähig auf einem Wagen montiert. Beide Körper, Pendelmasse und Wagen, werden als 
@@ -217,7 +217,7 @@ Eventuell noch einfügen: NNCUR, NNCX
 	Winkelgeschwindigkeit $\dot{\varphi}$ im Zustandsraum $(\varphi,\dot{\varphi})\in \mathds{R}^2$. \\
 	Das Pendel befindet sich im höchsten Punkt in einer instabilen Ruhelage. Verlässt es diese Ruhelage um einen 
 	Winkel $\varphi$, so muss dem Pendel wieder Energie hinzugefügt werden um es wieder in den Zustand der instabilen 
-	Ruhelage zurückgeführt werden kann. Das mathematische System zu dieser Zustandsrückführung definiert sich 
+	Ruhelage zurück zu versetzen. Das mathematische System zu dieser Zustandsrückführung definiert sich 
 	wiefolgt (vgl. \citep{Grune2005}):
 	\begin{eqnarray}
 		\dot{x_1} &=& x_2 \\
@@ -237,6 +237,8 @@ Eventuell noch einfügen: NNCUR, NNCX
 		\caption{Approximierte Wertefunktion $V_\mathcal{P}$ bei Simulationstiefe 16}
 	\end{figure}
 	\newpage
+	Ausgehend von der Ruhelage des Pendels im Punkt $(0,0)$ im Phasendiagramm nehmen die Kosten zur Stabilisierung 
+	des Pendelsystems zu.
 \section{Niedring-Rang-Approximation einer Matrix}
 	Je nach Tiefe der Simulation bzw. der Dimension des zugrunde liegenden Raumes (vgl. \textbf{Fluch der Dimension} 
 	nach Bellman \citep{Bellman1961}) können gigantische Matrizen entstehen. Da die gängigen Rechner bei der 
@@ -285,16 +287,16 @@ Eventuell noch einfügen: NNCUR, NNCX
 			Die $\sigma_i$ sind dabei die Singulärwerte von $A$ und $u_i$ und $v_i$ die Zeilen von $U$ bzw. $V$.
 		\end{Bemerkung}
 		Die Berechnungskosten, die für das Ausführen der Matrixzerlegung benötigt werden, betragen $\mathcal{O}(min(mn^2,m^2n))$ (vgl. \cite{mahoney2008}).
-		\newline 
-		\newline
+	%	\newline 
+		\subsubsection{Fehlerapproximation}
 		Im Folgenden wollen wir die Wertematrix $V$ so approximieren, dass der Fehler 
 		\begin{equation*}
 			e(D)=||V-D||_\xi
 		\end{equation*}
 		bezüglich einer Norm $\xi$ möglichst klein wird für Matrizen $D$ von Rang $rank(D)\leq k$. $\xi=2$ bezeichnet hierbei die 2-Norm ($||A||_2=\left(\sum_{i,j}|a_{ij}|^2\right)^\frac{1}{2}$), $\xi=max$ bezeichnet die Maximumsnorm ($||A||_{max}=\max_{i,j}|a_{ij}|$) und $\xi=F$ verwendet die Frobeniusnorm ($||A||_F=(\sigma_1^2+...+\sigma_r)^\frac{1}{2}$).
 		\newline
-		\subsubsection{Fehlerapproximation}
-		Die erste Frage, die auftaucht, ist die nach der Existenz einer  "besten" Rang-k-Approximation.
+
+		Die erste Frage, die es dabei zu klären gilt, ist die nach der Existenz einer  "besten" Rang-k-Approximation.
 		\begin{Satz}{(Eckart-Young)}
 			Sei eine Matrix $V$ von Rang $r$ gegeben durch \ref{eq:SVD} und $k<r$. Die beste Rang-$k$-Approximation 
 			von $V$, also eine Matrix, die
@@ -328,10 +330,28 @@ Eventuell noch einfügen: NNCUR, NNCX
 		\end{Definition}
 	\subsection{CUR-Zerlegung}	
 		\label{subsec:CUR}
+		\subsubsection{Definition}
 		Bei der CUR-Zerlegung werden im Gegensatz zur CX-Zerlegung Spalten und Zeilen der zu approximierenden Matrix 
 		verwendet. Die Matrix C enthält dabei Spalten von $V$ und Zeilen werden in R gefasst. Die Matrix $U$ wird 
-		dann so gewählt, dass der Fehler zwischen V und CUR bezüglich einer Norm minimal wird. \\
-		Die mathematische Definition der CUR-Zerlegung ist wiefolgt:
+		dann so gewählt, dass der Fehler zwischen $V$ und $\tilde{V}=CUR$ bezüglich einer Norm (i.d.R der Frobenius- oder Spektralnorm) minimal wird. \\
+		Die Struktur der CUR-Zerlegung stellt sich wiefolgt dar:
+		\[
+			\underbrace{\left(\begin{array}{ccccc}
+					  &   &  & & \\ & &  & &  \\ & & V &  &   \\ & & &  &   \\ & & &  &   \\ 
+					\end{array}\right)}_{m\times n}
+			\approx 
+			\underbrace{\left(\begin{array}{ccc}
+					 &   &   \\  &   &   \\ & C &   \\ &   &   \\ &   &   \\
+					\end{array}\right)}_{m\times c}\cdot 
+			\underbrace{\left(\begin{array}{ccc}
+					  &   &   \\ & U &   \\ &   &   \\ 
+					\end{array}\right)}_{c\times r}\cdot  
+			\underbrace{\left(\begin{array}{ccccc}
+					  &   &  & & \\ & & R & &  \\ & & &  &   \\ 
+					\end{array}\right)}_{r\times n}			
+		\]
+		Da wir nun die Idee hinter der CUR-Zerlegung sowie deren Struktur festgelegt haben, können wir die 
+		Approximation mathematisch definieren.
 		\begin{Definition}{(vgl. \citep{Drineas2009})}
 			Gegeben sei eine Matrix $V\in \mathds{R}^{m\times n}$. Sei $C\in\mathds{R}^{m\times 
 			c}$ eine Matrix, welche aus $c$ Spalten von $V$ besteht, und $R\in\mathds{R}^{r\times n}$ eine Matrix, 
@@ -339,12 +359,67 @@ Eventuell noch einfügen: NNCUR, NNCX
 			\in\mathds{R}^{c\times r}$ eine Spalten-Zeilen-basierte Approximation von $V$, beziehungsweise eine $CUR
 			$-Zerlegung von $V$.
 		\end{Definition}
-		Im Folgenden wird ein Verfahren zur Berechnung der $CUR$-Zerlegung nach Mahoney und Drineas \citep{mahoney2008} vorgestellt. \newline
-		\newline
 		Besonders kritisch bei der Berechnung der Zerlegung ist, welche Zeilen bzw. Spalten für die Approximation 
-		verwendet werden.
-		Dafür wird ein Rating erzeugt (siehe \citep{mahoney2008}), welche den Einfluss einer Spalte/Zeile auf die 
-		restlichen Einträge der Matrix beschreibt. \newline
+		verwendet werden. Dafür werden im Folgenden zwei verschiedene Verfahren und die resultierenden 
+		Approximationen dargestellt.
+		\subsubsection{Spaltenselektion anhand der 2-Norm}
+		Das folgende Verfahren beruht auf den Veröffentlichungen von Drineas und Kannan \citep{drineas2003}. \\
+		Einer ersten Intuition folgend kann behauptet werden, dass Spalten und Zeilen mit großer Länge, also großem 
+		Betrag bzw. großer 2-Norm, im Allgemeinen mehr Informationen über eine Matrix bereitstellen und somit 
+		relevanter sind als solche, welche nur wenige Einträge bzw. hauptsächlich Komponenten geringen Betrages 
+		beinhalten. Dementsprechend wird die Wahrscheinlichkeit $q_j$, dass die $j-$te Spalte der Matrix $V$  
+		ausgewählt und zur Matrix C hinzugefügt wird, wie folgt definiert:
+		\begin{equation*}
+			q_j\geq 0, \hspace{1cm} \sum_j q_j=1, \hspace{1cm} q_j=\frac{|V^{(j)}|^2}{||V||_F^2}
+		\end{equation*}
+		wobei $|V^{(j)}|^2$ die quadrierte euklidische Norm des $j-$ten Spaltenvektors von $V$ 
+		repräsentiert. Analog dazu gibt $p_i$ mit
+		\begin{equation*}
+			p_i\geq 0, \hspace{1cm} \sum_i p_i=1, \hspace{1cm} p_i=\frac{|V_{(i)}|^2}{||V||_F^2}
+		\end{equation*}
+		die Wahrscheinlichkeit an, dass die $i-$te Zeile von $V$ für die Matrix R ausgewählt 
+		wird. $|V_{(i)}|^2$ bezeichnet hier die quadrierte euklidische Norm des $i-$ten Zeilenvektors von $V$. \\
+		Für den im Folgenden definierten Algorithmus wird die  Straffheit der Definition der Wahrscheinlichkeiten ein 
+		wenig entschärft, sodass für die Wahrscheinlichkeiten $p_i$ und $q_j$ abschätzend gilt:
+		\begin{equation}
+			p_i\geq\alpha\frac{|V_{(i)}|^2}{||V||_F^2} \hspace{1cm} q_j\geq\beta\frac{|V^{(j)}|^2}{||V||_F^2} \hspace{1cm} \alpha,\beta \leq 1
+		\end{equation}
+		Seien die Mengen der Wahrscheinlichkeiten gegeben durch $\{p_i\}_{i=1}^m$ bzw. $\{q_j\}_{j=1}^n$, dann kann 
+		die CUR-Zerlegung durch folgenden Algorithmus berechnet werden: \newpage
+		\begin{table}[h]
+		\center
+		\fbox{
+		\begin{minipage}{16cm}
+		\vspace{5mm}
+			\textbf{CUR-Zerlegung mit 2-Norm-Rating} \newline
+			\newline
+			\begin{tabular}{ll}
+				\textbf{Input:} & Matrix $V\in\mathds{R}^{m\times n}$, Reihenanzahl $r\leq m$, Zeilenanzahl $c\leq n$,\\
+				 &  Zielrang $k\leq\min\{r,c\}$, $\{p_i\}_{i=1}^m$ und $\{q_j\}_{j=1}^n$ \\
+				(i) & für $t=1\dots c$\\
+				 &  die Matrix $C$ \\
+				(ii) & Wende COLUMNSELECT auf $A^T$ an mit $r=\mathcal{O}(k \log \frac{k}{\epsilon^2})$ und berechne 
+				  \\ &somit die Matrix $R$ \\
+				(iii) & Definiere die Matrix $U$ als $U=C^+AR^+$, wobei $X^+$ die Moore-Penrose- \\ & Inverse 
+				\citep{penrose1955}von X ist \\
+				\textbf{Output:} & Spaltenmatrix $C$, Zeilenmatrix $R$ und Matrix $U$ \\
+			\end{tabular}
+			\vspace{2mm}
+		\end{minipage}
+		}
+		\newline
+		\caption{Der Algorithmus zur Bestimmung der CUR-Zerlegung mithilfe des 2-Norm-Rankings}
+		\end{table}
+		\textbf{Nachteile:}
+		\begin{itemize}
+			\item Durch die zufällige Auswahl der Spalten und Zeilen kann man nur etwas über den zu erwartenden 
+			Fehler aussagen.
+			\item Der resultierende Fehler zwischen Approximation und Zielmatrix ist additiv und abhängig von $||V||_F$
+		\end{itemize}
+		\subsubsection{Spaltenselektion anhand des statistischen Einflusswertes}
+		Im Folgenden wird das Verfahren der Spaltenselektion anhand eines statistischen Wertes (engl.: 
+		\textit{leverage score}) nach Mahoney und Drineas \citep{mahoney2008} dargestellt. Dabei wird ein Rating erzeugt, welche den 
+		Einfluss einer Spalte/Zeile auf die "beste" Rang-k-Approximation, also die Singulärwertzerlegung von Rank $k$, der Matrix beschreibt. Dieser spezifische Wert beschreibt, mit welcher Wahrscheinlichkeit eine Zeile/Spalte selektiert und zur Approximationsmatrix hinzugefügt wird. \newline
 		\newline	
 		\textbf{Bestimmung des statistischen Einflusswertes einer Spalte/Zeile:} \newline 
 		Aus \ref{eq:SVDsum} wissen wir, dass sich die $j$-te Spalte einer Zielmatrix $V$ von Rang $r$ darstellen lassen kann als
@@ -355,7 +430,7 @@ Eventuell noch einfügen: NNCUR, NNCX
 		\begin{equation*}
 			V^j=\sum_{\xi=1}^k(\sigma_\xi u^\xi )v_j^\xi
 		\end{equation*}
-		wobei $u^\xi$ der $\xi$-te linke Singulärvektor und $v_j\xi$ die $j$-te Koordinate des $\xi$-ten rechten 
+		wobei $u^\xi$ der $\xi$-te linke Singulärvektor und $v_j^\xi$ die $j$-te Koordinate des $\xi$-ten rechten 
 		Singulärvektors ist. Der \textbf{statistische Einflusswert} einer Spalte von $V$ kann nun gemessen werden durch
 		\begin{equation}
 			\label{eq:score}
@@ -363,7 +438,7 @@ Eventuell noch einfügen: NNCUR, NNCX
 		\end{equation}
 		Er gibt an, wie groß der Einfluss einer Spalte auf die durch die Singulärwertzerlegung definierte "beste" \ Rang-k-Approximation $V_k$ ist. \\
 		Diese Einflusswerte bilden eine Wahrscheinlichkeitsverteilung auf den $n$ Spalten und es gilt: $\sum_{j=1}^n\pi_j=1$ und $\pi_j\geq 0$. \newline
-		Das Selektieren der Spalten wird anschließend mithilfe des Algorithmus' COLUMNSELECT (vgl. \citep{mahoney2008}) durchgeführt: \newline
+		Das Selektieren der Spalten wird anschließend mithilfe des Algorithmus' COLUMNSELECT (vgl. \citep{mahoney2008}) durchgeführt: 
 		\begin{enumerate}
 			\item \textbf{Input:} Matrix $V\in \mathds{R}^{m\times n}$ und Fehlerparameter $\epsilon$
 			\item Berechne die ersten $k$ rechten Singulärvektoren ($v_1,...,v_k$) von V und die statistischen Einflusswerte \ref{eq:score} der Spalten von V.
@@ -373,12 +448,30 @@ Eventuell noch einfügen: NNCUR, NNCX
 		Mithilfe dieses Algorithmus' entsteht eine Matrix $C$, die $c'\leq c$ der selektierten Spalten verwendet. Die 
 		Kosten zur Ausführung des Algorithmus' beruhen hauptsächlich auf der Berechnung der ersten $k$ 
 		Singulärvektoren und sind daher $\mathcal{O}(mnk)$ \citep{mahoney2008}.\newline
-		Zur Berechnung der Vektoren $C,U$ und $R$ wird abschließend folgender Algorithmus ALGORITHMCUR (vgl \citep{mahoney2008}) verwendet:
-		\begin{enumerate}
-			\item Wende COLUMNSELECT auf $A$ an mit $c=\mathcal{O}(k \log \frac{k}{\epsilon^2})$ und berechne somit die Matrix $C$
-			\item Wende COLUMNSELECT auf $A^T$ an mit $r=\mathcal{O}(k \log \frac{k}{\epsilon^2})$ und berechne somit die Matrix $R$
-			\item Definiere die Matrix $U$ als $U=C^+AR^+$, wobei $X^+$ die Moore-Penrose-Inverse \citep{penrose1955} von X ist
-		\end{enumerate}
+		Zur Berechnung der Matrizen $C,U$ und $R$ wird abschließend folgender Algorithmus ALGORITHMCUR (vgl. \citep{mahoney2008}) verwendet: \newpage
+		\begin{table}[h]
+		\center
+		\fbox{
+		\begin{minipage}{16cm}
+		\vspace{5mm}
+			\textbf{ALGORITHMCUR} \newline
+			\newline
+			\begin{tabular}{ll}
+				\textbf{Input:} & Matrix $V\in\mathds{R}^{m\times n}$, Zielrang $k$, Fehlerparameter $\epsilon$ \\
+				(i) & Wende COLUMNSELECT auf $A$ an mit $c=\mathcal{O}(k \log \frac{k}{\epsilon^2})$ und berechne somit\\
+				 &  die Matrix $C$ \\
+				(ii) & Wende COLUMNSELECT auf $A^T$ an mit $r=\mathcal{O}(k \log \frac{k}{\epsilon^2})$ und berechne 
+				  \\ &somit die Matrix $R$ \\
+				(iii) & Definiere die Matrix $U$ als $U=C^+AR^+$, wobei $X^+$ die Moore-Penrose- \\ & Inverse 
+				\citep{penrose1955}von X ist \\
+				\textbf{Output:} & Spaltenmatrix $C$, Zeilenmatrix $R$ und Matrix $U$ \\
+			\end{tabular}
+			\vspace{2mm}
+		\end{minipage}
+		}
+		\newline
+		\caption{Der Algorithmus ALGORITHMCUR zur Bestimmung der CUR-Zerlegung mithilfe des \\ Leverage Scores}
+		\end{table}
 		Die Wahrscheinlichkeit für die Auswahl einer der $c$ Zeilen bzw. $r$ Reihen erfolgt dabei proportional zur Einflussrate der entsprechenden Matrixeinträge. \newline
 		\newline
 		Die mithilfe des Algorithmus' konstruierte approximative Matrix $V'=CUR$ erfüllt nun, dass
@@ -406,10 +499,17 @@ Eventuell noch einfügen: NNCUR, NNCX
 			\caption{Tabelle über verschiedene CUR-Approximationen}
 		\end{figure}
 		
-		\textbf{Vorteil:} Zeilen und Spalten der ursprünglichen Matrix werden verwendet  \newline
-		\newline
-		\textbf{Nachteil:} Die approximierende Matrix ist nicht mehr von der Form \ref{eq:approx}. \newline
-		\newline
+		\textbf{Vorteile:}
+		\begin{itemize}
+			\item Zeilen und Spalten der ursprünglichen Matrix werden verwendet.
+			\item Auch bei der Selektion von nur einer geringen Anzahl an Spalten/Zeilen ($\approx\frac{1}{10}$ aller Spalten) wird bereits annähernd ein voller Rang der Matrix $\tilde{V}$ erreicht.
+		\end{itemize}
+		\textbf{Nachteile:} 
+		\begin{itemize}
+			\item Die approximierende Matrix ist nicht mehr von der Form \ref{eq:approx}
+			\item Die Hauptkosten dieses Verfahrens zur Auswahl der Spalten bzw. Zeilen resultieren aus der Berechnung der relativ teuren Singulärwertzerlegung $\rightarrow$ hohe Berechnungskosten
+		\end{itemize}
+		
 \section{Anwendung der CUR-Zerlegung}
 	Die numerische Berechnung der approximativen Matrix $C'=CUR$ wird in $R$\footnote{R Version 3.1.1, Script ausgeführt mithilfe RStudio Version 0.98.1017} durchgeführt. Dafür wird ein auf Drineas und Mahoney \citep{mahoney2008} basierender Algorithmus \citep{bodor2012} verwendet. \newline
 	Die ursprünglich von Drineas et al. \citep{mahoney2008} veröffentlichte Methode verwendet eine Auswahl an Zeilen 
@@ -477,6 +577,13 @@ Eventuell noch einfügen: NNCUR, NNCX
 	Typischerweise ist diese Bedingung aber nicht für alle $x\in X$ erfüllt. Als alternative Formulierung soll 
 	deshalb die Menge $\bar{S}=\{x\in X| R(x)<0\}$ bezüglich des Lebesque-Maßes möglichst geringes Volumen besitzen.
 \section{Ausblick und Diskussion}
+	\newpage
+\section*{Abkürzungen}
+	\begin{tabular}{ll}
+		i.i.d & unabhängig identisch verteilt \\
+		m.h.W & mit hoher Wahrscheinlichkeit\\
+		SVD & Singulärwertzerlegung \\
+	\end{tabular}
 	\newpage
 \bibliography{BA_lib}
 \end{document}

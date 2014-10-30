@@ -1,5 +1,5 @@
 \BOOKMARK [1][-]{section.1}{Einf\374hrung}{}% 1
-\BOOKMARK [1][-]{section.2}{Einf\374hrung und Motivation}{}% 2
+\BOOKMARK [1][-]{section.2}{Hintergrund und Motivation}{}% 2
 \BOOKMARK [2][-]{subsection.2.1}{Optimale Kontrolle}{section.2}% 3
 \BOOKMARK [2][-]{subsection.2.2}{Berechnung der Wertefunktion}{section.2}% 4
 \BOOKMARK [2][-]{subsection.2.3}{Beispiel: das invertierte Pendel}{section.2}% 5
@@ -7,12 +7,13 @@
 \BOOKMARK [2][-]{subsection.3.1}{Singul\344rwertzerlegung \(SVD\)}{section.3}% 7
 \BOOKMARK [3][-]{subsubsection.3.1.1}{Definition}{subsection.3.1}% 8
 \BOOKMARK [3][-]{subsubsection.3.1.2}{Fehlerapproximation}{subsection.3.1}% 9
-\BOOKMARK [2][-]{subsection.3.2}{CX-Zerlegung}{section.3}% 10
-\BOOKMARK [2][-]{subsection.3.3}{CUR-Zerlegung}{section.3}% 11
-\BOOKMARK [3][-]{subsubsection.3.3.1}{Definition}{subsection.3.3}% 12
-\BOOKMARK [3][-]{subsubsection.3.3.2}{Spaltenselektion anhand der 2-Norm}{subsection.3.3}% 13
-\BOOKMARK [3][-]{subsubsection.3.3.3}{Spaltenselektion anhand des statistischen Einflusswertes}{subsection.3.3}% 14
-\BOOKMARK [1][-]{section.4}{Anwendung der CUR-Zerlegung}{}% 15
-\BOOKMARK [2][-]{subsection.4.1}{Beispiel: das invertierte Pendel}{section.4}% 16
-\BOOKMARK [1][-]{section.5}{Nach der CUR-Zerlegung}{}% 17
-\BOOKMARK [1][-]{section.6}{Ausblick und Diskussion}{}% 18
+\BOOKMARK [2][-]{subsection.3.2}{CUR-Zerlegung}{section.3}% 10
+\BOOKMARK [3][-]{subsubsection.3.2.1}{Definition}{subsection.3.2}% 11
+\BOOKMARK [3][-]{subsubsection.3.2.2}{Zuf\344llige Spaltenselektion auf Basis der Gleichverteilung}{subsection.3.2}% 12
+\BOOKMARK [3][-]{subsubsection.3.2.3}{Spaltenselektion anhand des Leverage Scores}{subsection.3.2}% 13
+\BOOKMARK [1][-]{section.4}{Berechnung der Residuen}{}% 14
+\BOOKMARK [2][-]{subsection.4.1}{Definition}{section.4}% 15
+\BOOKMARK [2][-]{subsection.4.2}{Beispiel: Residuum der exakten Wertefunktion}{section.4}% 16
+\BOOKMARK [1][-]{section.5}{Qualitativer Vergleich der Approximationsmethoden}{}% 17
+\BOOKMARK [2][-]{subsection.5.1}{Anwendung der Rang-k-Singul\344rwertzerlegung}{section.5}% 18
+\BOOKMARK [2][-]{subsection.5.2}{Anwendung der CUR-Zerlegung auf Basis der Gleichverteilung}{section.5}% 19

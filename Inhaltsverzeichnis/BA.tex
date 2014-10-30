@@ -1,4 +1,4 @@
-	\documentclass[12pt,a4paper,twoside]{article}
+\documentclass[12pt,a4paper,twoside]{article}
 \usepackage[ngerman]{babel}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -14,6 +14,7 @@
 \usepackage{enumerate}
 %\usepackage{cite}
 %\usepackage{natbib}
+\usepackage{verbatim}
 \setlength{\voffset}{-28.4mm}
 \setlength{\hoffset}{-1in}
 \setlength{\topmargin}{20mm}
@@ -75,8 +76,8 @@
 
 Bachelor-Arbeit\\[15mm]
 
-{\Huge
-  Titel
+{\LARGE
+Qualitativer Vergleich diverser Methoden zur Matrixrekonstruktion im Kontext der optimalen Stabilisierung des inversen Pendels
 }
 \bigskip
 
@@ -86,10 +87,10 @@ Markus Stachl
 \end{center}
 \vspace*{75mm}
 
-Aufgabensteller: ...
+Aufgabensteller: Prof. Dr. Oliver Junge
 \medskip
 
-Betreuer: ...
+Betreuer: Prof. Dr. Oliver Junge
 \medskip
 
 Abgabetermin: ...
@@ -119,9 +120,23 @@ Daf"ur ist hier Platz.
 \pagestyle{headings}
 
 \section{Einführung}
-Eventuell noch einfügen: NNCUR, NNCX
-
-\section{Einführung und Motivation}
+	Seit einigen Jahrzehnten befinden wir uns in einer Gesellschaft, in der wir freien Zugang zu aller Arten von 
+	Informationen haben. Durch Wissens-Datenbanken wie Wikipedia wird jedem der Zugriff zu Spezialwissen verschiedenster Themen ermöglicht und jeder Experte kann sein eigenes Spezialwissen inserieren und somit verbreiten.
+%	 Durch die Entwicklung von Suchmaschinen wie Google und Yahoo wird der Zugriff auf diese Quellen erleichtert. 
+%	Durch den stetigen Upload an Daten steht die Informationstheorie vor einem neuen Problem: how to handle Big Data.
+%	Laut einer Studie der \textit{pcwelt} hat die Menschheit bis zum Jahre 2013 über 2 Zettabyte (Zetta = $10^{21}$) Daten produziert und gespeichert.
+	\\
+	In dem Informationszeitalter, in dem dem sich unsere Gesellschaft derzeit befindet, liegt das Augenmerk nicht 
+	mehr in der Informationsbeschaffung, sondern in der Speicherung dieser Informationen und der Erleichterung des 
+	Zugriffs auf diese. \\
+	Leider nimmt die Leistungsfähigkeit der Rechner nicht in dem selben Maße zu wie die Menge an Daten. Aus diesem 
+	Grund ist es notwendig, durch die Untersuchung einer finiten Teilmenge des Ganzen genügend Informationen zu 
+	sammeln, um damit Rückschlüsse auf die Gesamtheit ziehen zu können. \\
+	An dieser Stelle setzt diese Arbeit ein. Ist Information, beispielsweise zu den optimalen Kosten zur Stabilisierung eines instabilen Systems, in Form einer Matrix gegeben, so soll aus einer finiten Anzahl an Vektoren, die idealerweise viel kleiner ist als der Rang der Zielmatrix, in Kombination mit einem Algorithmus die ursprüngliche Matrix möglichst genau wiederhergestellt werden. Bevorzugt wird dabei ein Algorithmus mit geringen Berechnungskosten.
+	Neben der gängigen Methode der Singulärwertzerlegung (kurz SVD, von engl. \textit{singular value decomposition}), welche leider einige Limitierungen durch die hohen Berechnungskosten besitzt, wird in der vorliegenden Arbeit ein relativ junges Verfahren vorgestellt, die sogenannte CUR-Zerlegung. \\
+	Bei dieser Methode zur Rekonstruktion einer Matrix wird versucht, die Zielmatrix mithilfe einer geringen Anzahl an Zeilen und Spalten derselben Matrix wiederherzustellen. Die Selektion der Zeilen bzw. Spalten wird anhand einer Wahrscheinlichkeitsverteilung vorgenommen. Ergebnisse zu zwei Arten von Verteilungen werden hier verglichen: zum Einen bei einer Gleichverteilung der einzelnen Selektionswahrscheinlichkeiten, zum Anderen die Selektion auf Basis des Leverage Scores. Abschließend werden die einzelnen Simulationsergebnisse miteinander verglichen und ein aussagekräftiges Fazit abgegeben.
+	\newpage
+\section{Hintergrund und Motivation}
 	\subsection{Optimale Kontrolle}
 	Gegeben sei das Problem der optimalen Stabilisierung eines (instabilen) diskreten Systems
 	\begin{equation}
@@ -232,13 +247,16 @@ Eventuell noch einfügen: NNCUR, NNCX
 	Berechnet man auf Basis dieses mathematischen Modells nun die Wertefunktion $V_\mathcal{P}$ wie in 
 	\ref{sec:valuef} definiert, so ergibt sich folgendes Bild:
 	\begin{figure}[h]
+		
 		\center
 		\includegraphics[scale=0.55]{valuefunction_plot_256.jpg}
-		\caption{Approximierte Wertefunktion $V_\mathcal{P}$ bei Simulationstiefe 16}
+		\caption{\label{pic:Vapp}Approximierte Wertefunktion $V_\mathcal{P}$ bei Simulationstiefe 16}
 	\end{figure}
-	\newpage
+	\newline
 	Ausgehend von der Ruhelage des Pendels im Punkt $(0,0)$ im Phasendiagramm nehmen die Kosten zur Stabilisierung 
 	des Pendelsystems zu.
+	\textcolor{red}{hier noch etwas aus dem gaio paper eintragen}
+	\newpage
 \section{Niedring-Rang-Approximation einer Matrix}
 	Je nach Tiefe der Simulation bzw. der Dimension des zugrunde liegenden Raumes (vgl. \textbf{Fluch der Dimension} 
 	nach Bellman \citep{Bellman1961}) können gigantische Matrizen entstehen. Da die gängigen Rechner bei der 
@@ -250,6 +268,7 @@ Eventuell noch einfügen: NNCUR, NNCX
 	\end{equation}
 	gefunden werden, wobei $\sigma_i\in \mathds{R}$ Konstanten und $u_i, v_i$ Vektoren im $\mathds{R}^n$ sind. Im Folgenden werden einige Näherungen vorgestellt.
 	\subsection{Singulärwertzerlegung (SVD)}
+		\label{sec:SVD}
 		\subsubsection{Definition}
 		Die klassische Singulärwertzerlegung ist eine Erweiterung der Diagonalisierung von reellen quadratischen 
 		Matrizen auf komplexe $\mathds{R}^{m\times n}$-Matrizen und gerade in der numerischen Mathematik von großem 
@@ -316,18 +335,19 @@ Eventuell noch einfügen: NNCUR, NNCX
 		\begin{Beweis}
 			Für einen Beweis siehe \cite{Golub2013}.
 		\end{Beweis}
-		Die Kosten der Rang-k-Singulärwertzerlegung betragen $\mathcal{O}(k(m+n))$ \citep{Drineas2006}. \newline
+		Zusammenfassend kann über die Matrixzerlegung mithilfe der Singulärwertzerlegung folgendes gesagt werden: \newline
 		\newline
-		\textbf{Nachteil:} Es werden keine konkreten Einträge der ursprünglichen Matrix $V$ verwendet, weswegen die Singulärwertzerlegung ohne Erweiterungen für unsere Zwecke nicht verwendbar ist.\newline
-		\newline
-		In den nächsten beiden Abschnitten werden zwei Verfahren vorgestellt, welche Spalten und/oder Zeilen der 
+		\textbf{Vorteil:}
+		\begin{itemize}
+			\item Die Singulärwertzerlegung ist die bezüglich der Maximumsnorm "beste" \ Rang-k-Approximation einer Matrix.
+\end{itemize}		
+		\textbf{Nachteile:} 
+		\begin{itemize}
+			\item Sehr hohe Kosten zum Ausführen der Singulärwertzerlegung. Die Kosten der Rang-k-Singulärwertzerlegung betragen $\mathcal{O}(kmn)$ (siehe \citep{Drineas2006}).
+			\item Zur Approximation werden keine Einträge der Zielmatrix verwendet.
+		\end{itemize}
+		Im nächsten Abschnitt werden zwei Verfahren vorgestellt, welche zur Approximation Spalten und Zeilen der 
 		Eingabematrix verwenden.
-	\subsection{CX-Zerlegung}
-		\label{subsec:CX}
-		Die erste approximative Matrix-Zerlegung, welche konkrete Einträge der ursprünglichen Matrix verwendet, ist die CX-Zerlegung (vgl. \citep{Drineas2009}). 
-		\begin{Definition}
-			Sei $A$ eine $m\times n$-Matrix. Sei $C\in \mathds{R}^{m\times c}$ eine Matrix bestehend aus $c$ Spalten der Matrix A (in der Regel ist $c\ll n$). Dann ist die approximative Matrix $A'=CX$ für jede beliebige Matrix $X\in \mathds{R}^{c\times n}$ eine spaltenbasierte Approximation von $A$, beziehungsweise eine $CX$-Zerlegung von $A$.
-		\end{Definition}
 	\subsection{CUR-Zerlegung}	
 		\label{subsec:CUR}
 		\subsubsection{Definition}
@@ -362,61 +382,48 @@ Eventuell noch einfügen: NNCUR, NNCX
 		Besonders kritisch bei der Berechnung der Zerlegung ist, welche Zeilen bzw. Spalten für die Approximation 
 		verwendet werden. Dafür werden im Folgenden zwei verschiedene Verfahren und die resultierenden 
 		Approximationen dargestellt.
-		\subsubsection{Spaltenselektion anhand der 2-Norm}
-		Das folgende Verfahren beruht auf den Veröffentlichungen von Drineas und Kannan \citep{drineas2003}. \\
-		Einer ersten Intuition folgend kann behauptet werden, dass Spalten und Zeilen mit großer Länge, also großem 
-		Betrag bzw. großer 2-Norm, im Allgemeinen mehr Informationen über eine Matrix bereitstellen und somit 
-		relevanter sind als solche, welche nur wenige Einträge bzw. hauptsächlich Komponenten geringen Betrages 
-		beinhalten. Dementsprechend wird die Wahrscheinlichkeit $q_j$, dass die $j-$te Spalte der Matrix $V$  
-		ausgewählt und zur Matrix C hinzugefügt wird, wie folgt definiert:
-		\begin{equation*}
-			q_j\geq 0, \hspace{1cm} \sum_j q_j=1, \hspace{1cm} q_j=\frac{|V^{(j)}|^2}{||V||_F^2}
-		\end{equation*}
-		wobei $|V^{(j)}|^2$ die quadrierte euklidische Norm des $j-$ten Spaltenvektors von $V$ 
-		repräsentiert. Analog dazu gibt $p_i$ mit
-		\begin{equation*}
-			p_i\geq 0, \hspace{1cm} \sum_i p_i=1, \hspace{1cm} p_i=\frac{|V_{(i)}|^2}{||V||_F^2}
-		\end{equation*}
-		die Wahrscheinlichkeit an, dass die $i-$te Zeile von $V$ für die Matrix R ausgewählt 
-		wird. $|V_{(i)}|^2$ bezeichnet hier die quadrierte euklidische Norm des $i-$ten Zeilenvektors von $V$. \\
-		Für den im Folgenden definierten Algorithmus wird die  Straffheit der Definition der Wahrscheinlichkeiten ein 
-		wenig entschärft, sodass für die Wahrscheinlichkeiten $p_i$ und $q_j$ abschätzend gilt:
-		\begin{equation}
-			p_i\geq\alpha\frac{|V_{(i)}|^2}{||V||_F^2} \hspace{1cm} q_j\geq\beta\frac{|V^{(j)}|^2}{||V||_F^2} \hspace{1cm} \alpha,\beta \leq 1
-		\end{equation}
-		Seien die Mengen der Wahrscheinlichkeiten gegeben durch $\{p_i\}_{i=1}^m$ bzw. $\{q_j\}_{j=1}^n$, dann kann 
-		die CUR-Zerlegung durch folgenden Algorithmus berechnet werden: \newpage
+		\subsubsection{Zufällige Spaltenselektion auf Basis der Gleichverteilung}
+		Der erste intuitive Ansatz zur Selektion von Matrixindizes ist der, der auf der \textbf{Gleichverteilung} 
+		der Indexwahrscheinlichkeiten beruht. Das heißt, die Wahrscheinlichkeit, dass eine beliebige Zeile oder 
+		Spalte einer Matrix ausgewählt wird, ist für alle relevanten Matrixbestandteile identisch. \newline Im Falle einer $m
+		\times n$-Matrix ergibt sich explizit $\sigma_i=\frac{1}{m}$ für die Wahrscheinlichkeit zur Selektion der 
+		$i-$ten Zeile respektive $\sigma_j=\frac{1}{n}$ für die der $j-$ten Spalte. Man sieht sehr schön, dass die Selektions-Wahrscheinlichkeit einer Zeile oder Spalte unabhängig von dem ausgewählten Index ist.\newline
+		\newline
 		\begin{table}[h]
 		\center
 		\fbox{
 		\begin{minipage}{16cm}
 		\vspace{5mm}
-			\textbf{CUR-Zerlegung mit 2-Norm-Rating} \newline
+			\textbf{CUR-Zerlegung bei Gleichverteilung} \newline
 			\newline
 			\begin{tabular}{ll}
-				\textbf{Input:} & Matrix $V\in\mathds{R}^{m\times n}$, Reihenanzahl $r\leq m$, Zeilenanzahl $c\leq n$,\\
-				 &  Zielrang $k\leq\min\{r,c\}$, $\{p_i\}_{i=1}^m$ und $\{q_j\}_{j=1}^n$ \\
-				(i) & für $t=1\dots c$\\
-				 &  die Matrix $C$ \\
-				(ii) & Wende COLUMNSELECT auf $A^T$ an mit $r=\mathcal{O}(k \log \frac{k}{\epsilon^2})$ und berechne 
-				  \\ &somit die Matrix $R$ \\
+				\textbf{Input:} & Matrix $V\in\mathds{R}^{m\times n}$, Reihenanzahl $r\leq m$, Spaltenanzahl $c\leq n$\\
+				(i) & für $t=1\dots r$ wähle die $i-$te Zeile mit Wahrscheinlichkeit $\sigma_i=\frac{1}{m}$ und \\
+				 & füge sie als Zeile $t$ der Matrix $R$ hinzu. Wurde diese Zeile bereits ausgewählt, \\
+				 & wiederhole den Selektionsschritt. Erhalte so die Reihenmatrix $R$. \\
+				(ii) & für $t=1\dots c$ wähle die $j-$te Spalte mit Wahrscheinlichkeit $\sigma_j=\frac{1}{n}$ und\\ & füge sie als Spalte $t$ der Matrix $C$ hinzu. Wurde diese Spalte bereits
+				\\ &  ausgewählt, wiederhole den Selektionsschritt. Erhalte so die Zeilenmatrix $C$. \\
 				(iii) & Definiere die Matrix $U$ als $U=C^+AR^+$, wobei $X^+$ die Moore-Penrose- \\ & Inverse 
-				\citep{penrose1955}von X ist \\
-				\textbf{Output:} & Spaltenmatrix $C$, Zeilenmatrix $R$ und Matrix $U$ \\
+				\citep{penrose1955}von X ist. \\
+				\textbf{Output:} & Spaltenmatrix $C\in\mathds{R}^{m\times c}$, Zeilenmatrix $R\in\mathds{R}^{r\times n}$ und Matrix $U\in\mathds{R}^{c\times r}$ \\
 			\end{tabular}
 			\vspace{2mm}
 		\end{minipage}
 		}
 		\newline
-		\caption{Der Algorithmus zur Bestimmung der CUR-Zerlegung mithilfe des 2-Norm-Rankings}
+		\caption{Der Algorithmus \textit{randCUR} zur Bestimmung der CUR-Zerlegung auf Grundlage der gleichverteilten Wahrscheinlichkeiten für die Selektion von Spalten- bzw. Zeilen-Indizes}
 		\end{table}
+		\textbf{Vorteile:}
+		\begin{itemize}
+		\item Geringe Berechnungskosten $\mathcal{O}(l+r+m+n)$, da die Singulärwertzerlegung zur Indexauswahl nicht benötigt wird.
+		\item Trotzdem relativ gute Approximationsergebnisse
+		\end{itemize}
 		\textbf{Nachteile:}
 		\begin{itemize}
-			\item Durch die zufällige Auswahl der Spalten und Zeilen kann man nur etwas über den zu erwartenden 
-			Fehler aussagen.
-			\item Der resultierende Fehler zwischen Approximation und Zielmatrix ist additiv und abhängig von $||V||_F$
+		\item Zufällige Selektion lässt keine Rückschlüsse auf den größtmöglichen Fehler zu.
+		\item Langsamere Konvergenz (vgl. \ref{sec:gleichv}) im Vergleich zur Singulärwertzerlegung
 		\end{itemize}
-		\subsubsection{Spaltenselektion anhand des statistischen Einflusswertes}
+		\subsubsection{Spaltenselektion anhand des Leverage Scores}
 		Im Folgenden wird das Verfahren der Spaltenselektion anhand eines statistischen Wertes (engl.: 
 		\textit{leverage score}) nach Mahoney und Drineas \citep{mahoney2008} dargestellt. Dabei wird ein Rating erzeugt, welche den 
 		Einfluss einer Spalte/Zeile auf die "beste" Rang-k-Approximation, also die Singulärwertzerlegung von Rank $k$, der Matrix beschreibt. Dieser spezifische Wert beschreibt, mit welcher Wahrscheinlichkeit eine Zeile/Spalte selektiert und zur Approximationsmatrix hinzugefügt wird. \newline
@@ -504,13 +511,125 @@ Eventuell noch einfügen: NNCUR, NNCX
 			\item Zeilen und Spalten der ursprünglichen Matrix werden verwendet.
 			\item Auch bei der Selektion von nur einer geringen Anzahl an Spalten/Zeilen ($\approx\frac{1}{10}$ aller Spalten) wird bereits annähernd ein voller Rang der Matrix $\tilde{V}$ erreicht.
 		\end{itemize}
+		\newpage
 		\textbf{Nachteile:} 
 		\begin{itemize}
 			\item Die approximierende Matrix ist nicht mehr von der Form \ref{eq:approx}
 			\item Die Hauptkosten dieses Verfahrens zur Auswahl der Spalten bzw. Zeilen resultieren aus der Berechnung der relativ teuren Singulärwertzerlegung $\rightarrow$ hohe Berechnungskosten
 		\end{itemize}
-		
-\section{Anwendung der CUR-Zerlegung}
+		\newpage
+\section{Berechnung der Residuen}
+\subsection{Definition}
+	Für die exakte Wertefunktion $V$ gilt nach Bellmann, dass
+	\begin{eqnarray*}
+		V(x_k)&=&\inf_{u\in U^{\mathds{N}}}\{q(x_k,u)+V(f(x_k,u))\} \\
+			&=&q(x_k,u_k^*)+V(f(x_k,u_k^*))
+	\end{eqnarray*}
+	mit dem minimierenden $u_k^*$, falls das Optimum angenommen wird, wobei $V(f(x_k,u))=:V(x_{k+1})$. Da $q(x,u)>0 \hspace{1mm}$ für $x\neq 0$ gilt also insbesondere, dass $V(x_k)>V(x_{k+1})$. \newline
+	\newline
+	Mit dieser Eigenschaft wird die Wertefunktion zu einer \textbf{Lyapunov-Funktion} (siehe \citep{Wiggins1990}), da gilt:
+	\begin{enumerate}
+		\item $V(x)\geq 0$ 
+		\item $V(x)=0 \Leftrightarrow x=0$
+		\item $V(x_k)>V(x_{k+1})$
+	\end{enumerate}
+	Leider ergibt sich bei der approximierenden $CUR$-Zerlegung $\tilde{V}$ das Problem, dass die Bedingung (iii) nicht 
+	mehr notwendigerweise erfüllt ist. \\
+	Für den resultieren Fehler berechnet man dazu das \textbf{Residuum} der Bellman-Gleichung. Dieses ist gegeben 
+	durch
+	\begin{equation}
+		\label{eq:residuum}
+		R(x)=\tilde{V}(x)-\inf_{u}\{q(x,u)+\tilde{V}(f(x,u))\}.
+	\end{equation}
+	mit
+	\begin{equation}
+		\tilde{u}(x)=argmin_{u\in U^{\mathds{N}}}\{q(x,u)+\tilde{V}(f(x,u)\}
+	\end{equation}
+	Im Falle des Erfüllens der Bedingung (iii) ergibt sich
+	\begin{equation}
+		R(x)\geq 0 \hspace{1cm}\forall x\in X
+	\end{equation}
+	da $q(x,u)\geq0$ für alle $x\in X$. \\
+	Typischerweise ist diese Bedingung aber nicht für alle $x\in X$ erfüllt. Als alternative Formulierung soll 
+	deshalb die Menge $\bar{S}=\{x\in X| R(x)<0\}$ bezüglich des Lebesque-Maßes möglichst geringes Volumen besitzen.
+	\subsection{Beispiel: Residuum der exakten Wertefunktion}
+	Die Berechnung des Residuums soll anhand der exakten Wertefunktion verdeutlicht werden. Diese exakte Wertematrix 
+	relativ zur Partition $\mathcal{P}$ entsteht, wie in \ref{eq:bellman} beschrieben, durch Anwendung des 
+	Optimalitätsprinzipes nach Bellman. Vergleicht man dieses nun mit der Definition des Residuums (siehe \ref{eq:residuum}), so liegt der Rückschluss nahe, dass das Residuum für die Wertefunktion trivial für alle Werte von $x$ ist (also $R(x)=0 \hspace{2mm}\forall x$). Wie Abbildung \ref{pic:res_exakt} aber verdeutlicht, gilt dies nicht 
+	für die gesamte Wertefunktion, sondern nur für den stabilisierbaren Bereich. Der Grund dafür liegt in der 
+	Konstruktion von $V$ nach dem Optimalitätsprinzip:
+	\begin{equation*}
+		V(x)=\inf_{u}\{q(x,u)+V(f(x,u))\}
+	\end{equation*}
+	Sei $x\in X\setminus S$ nun nicht stabilisierbar und $f(x,u)$ weiterhin Element in $X\setminus S$. Auch wenn 
+	\begin{figure}[h]
+	\center
+		\includegraphics[scale=0.4]{Residuum_exactV_depth14.jpg}
+		\caption{\label{pic:res_exakt}Residuum der exakten Wertefunktion bei Simulationstiefe 14}
+	\end{figure}
+	$V(f(x,u))=-1$ nach Definition wegen der nicht vorhandenen Stabilisierbarkeit, so ist aber $q(x,u)$ definiert und nicht-negativ. Aus diesem Grund ergeben sich 
+	am Rand und im nichtstabilisierbaren Bereich von $X$ Abweichungen beim Residuum. Da in der Anwendung aber 
+	hauptsächlich der stabilisierbare Bereich von Relevanz ist, nehmen wir dieses Phänomen zur Kenntnis, ignorieren 
+	es aber in den folgenden Experimenten und konzentrieren uns auf den stabilisierbaren Bereich $S$.
+	\newpage
+\section{Qualitativer Vergleich der Approximationsmethoden}
+Im Folgenden werden einige Experimente zu den verschiedenen Methoden zur Rekonstruktion der Zielmatrix durchgeführt. Als Vergleichsobjekt dient dabei die Matrix der nötigen Kosten zur Stabilisierung eines inversen Pendels. Die Ergebnisse wurden mithilfe des graphentheoretischen Ansatzes von Grüne und Junge \citep{Grune2005} in Matlab\footnote{Verwendet wurde das Software-Paket GAIO$^\copyright$	 - Global Analysis of Invariant Objects für Matlab} bei Simulationstiefe 14 - entspricht einer resultierenden Kostenmatrix $V\in\mathds{R}^{128\times 128}$ - erstellt. Die Verfahren werden in Hinblick auf Konvergenzgeschwindigkeit, Akkuratesse und Standort der größten Fehler verglichen.
+\subsection{Anwendung der Rang-k-Singulärwertzerlegung}
+In Kapitel \ref{sec:SVD} wurde bereits festgestellt, dass die Singulärwertzerlegung die beste Rang-$k$-Annäherung einer Matrix $V$ bezüglich der Frobenius- bzw. Spektralnorm liefert. Leider beinhaltet dieses Faktum keine a-priori-Informationen, wie sich die Fehler in einem bestimmten Bereich der Matrix verhalten. \\
+Aus diesem Grund werden folgend einige experimentelle Beobachtungen geliefert, die Rückschlüsse auf diese fehlenden Informationen geben sollen. 
+\subsubsection*{Akkuratesse und Konvergenz}
+\begin{figure}[h]
+	
+	\centering
+	\includegraphics[scale=0.45]{SVD_plots_graph}
+	\caption{\label{pic:SVD_plots}links: Boxplots der resultieren Approximationsmatrizen bei Auswahl der 10 (A), 20 (B), 30 (C) und 60 (D) oberen Singulärvektoren. rechts: resultierender Fehler der Rang-k-Singulärwertzerlegung bezüglich der Frobeniusnorm}
+\end{figure}
+Wie in der oberen linken Abbildung ersichtlich, ist schon bei der Auswahl der 20 - also ca. $\frac{1}{6}$ aller - oberen Singulärwerten klar die Struktur der ursprünglichen Matrix zu erkennen. Werden weitere Singulärwerte hinzugefügt, so verbessert sich das Bild zwar noch stetig, allerdings nur noch in geringerem Maße. Zieht man die 60 größten Singulärwerte in Betracht, also in etwa die Hälfte, so unterscheidet sich das Ergebnis kaum mehr von der Originalmatrix (vgl. Abbildung \ref{pic:Vapp}). \newline
+\newline
+Verdeutlicht wird dies auch durch den Plot des resultierenden Fehlers bezüglich der Frobeniusnorm (siehe Abbildung \ref{pic:SVD_plots} rechts). Die mit Hilfe der Singulärwertzerlegung erhaltene Approximationsmatrix konvergiert exponentiell in der Anzahl an gewählten Singulärwerten bzw. im Rang k der Approximation gegen die Zielmatrix $V$.
+%\newpage
+\subsubsection*{Fehlerlokalisierung}
+Auch wenn wir nun wissen, dass der Fehler relativ schnell gegen Null konvergiert, so beinhaltet dies keine Informationen darüber, wo sich bei einer Rang-k-Approximation die größten Fehler befinden. In dem vorliegenden Fall sind wir vor allem an einer gewissen Genauigkeit innerhalb des stabilisierbaren Bereiches interessiert. Größere Fehler außerhalb dieses Bereiches können deshalb gegebenenfalls ignoriert werden.
+\begin{figure}[h]
+\center
+	\includegraphics[scale=0.33]{SVD_errorloc.png}
+	\caption{\label{pic:svd_errorloc}Lokalisierung der größten Fehler bei der Approximation durch die Singulärwertzerlegung von Rang 10 (A), 20 (B), 40 (C) und 60 (D)}
+\end{figure}
+Wie in Abbildung \ref{pic:svd_errorloc} zu sehen ist, befinden sich die größten Abweichungen der Approximation verglichen mit dem Original größtenteils am Rand des stabilisierbaren Bereiches. Während es bei der Singulärwertzerlegung von Rang 10 noch vereinzelt zu Abweichungen im Inneren kommt, stimmen die SVD von Rang 20 und höher im stabilisierbaren Bereich fast komplett überein und unterscheiden sich nur noch in der Größe der Abweichung am Rand des stabilisierbaren Bereiches.
+\newpage
+\subsubsection*{Residuum}
+Für die positive Bewertung eines Verfahrens bezüglich des Residuums ist ausschlaggebend, wie viele Einträge der Residuenmatrix $R$ nicht-negativ sind. Wird diese Matrix als flache Oberfläche graphisch dargestellt, so lässt sich anhand der Farben der Wert der Matrixeinträge erkennen. Bei der SVD von Rang 10 und Rang 20 sind noch sehr deutlich rote und gelbe "Flecken" \ sichtbar, welche in der Graphik die Stellen mit negativem Residuum symbolisieren. Erst bei  Einbeziehung von mindestens 40 oberen Singulärwerten treten diese Punkte nur noch vereinzelt und mit kleinerem Volumen auf.
+\begin{figure}[h]
+	\center
+	\includegraphics[scale=0.4]{svd_residuen}
+	\caption{Darstellung der Residuen bei Anwendung der Singulärwertzerlegung von Rang 10 (A), 20 (B), 40 (C) und 60 (D). Zur besseren Übersicht wird das Ergebnis auf den Bereich $[-1,1]$ eingeschränkt.}
+\end{figure}
+\subsubsection*{Zusammenfassung}
+\begin{itemize}
+	\item[$+$] schnelle Konvergenz
+	\item[$+$] innere Struktur der Matrix bleibt auch bei geringem Approximations-Rang erhalten
+	\item[$+$] auch bei geringem Rang befinden sich die Fehler größtenteils am Rand des stabilisierbaren Bereiches
+	\item[$+$] geringes Volumen des negativen Residuums
+	\item[$-$] vergleichsweise sehr hohe Berechnungskosten
+\end{itemize}
+\newpage
+\subsection{Anwendung der CUR-Zerlegung auf Basis der Gleichverteilung}
+\label{sec:gleichv}
+\begin{comment}
+\subsubsection*{Akkuratesse und Konvergenz}
+\begin{figure}[h]
+\center
+	\includegraphics[scale=0.3]{randCUR_plots2.png}
+	\caption{Matrixplot der resultierenden Approximationen bei Auswahl von 10 (A), 20 (B), 40 (C), 60 (D) und 90 (E) Zeilen und Spalten}
+\end{figure}
+
+\subsubsection*{Fehlerlokalisierung}
+\begin{figure}[h]
+\center
+	\includegraphics[scale=0.4]{randCUR_errorloc.png}
+	\caption{SVD error}
+\end{figure}
+\subsection{Anwendung der CUR-Zerlegung auf Basis des Leverage Scores}
 	Die numerische Berechnung der approximativen Matrix $C'=CUR$ wird in $R$\footnote{R Version 3.1.1, Script ausgeführt mithilfe RStudio Version 0.98.1017} durchgeführt. Dafür wird ein auf Drineas und Mahoney \citep{mahoney2008} basierender Algorithmus \citep{bodor2012} verwendet. \newline
 	Die ursprünglich von Drineas et al. \citep{mahoney2008} veröffentlichte Methode verwendet eine Auswahl an Zeilen 
 	und Spalten der Zielmatrix entsprechend der stochastischen Einflussrate. Dies impliziert einige numerische 
@@ -544,39 +663,11 @@ Eventuell noch einfügen: NNCUR, NNCX
 		\includegraphics[scale=0.3]{CUR_fehlerstellen}
 		\caption{Lokalisierung der Stellen der größen Fehler der Wertefunktion bei einer Auswahl von 20 (a) 50 (b) 80 (c) und 120 (d) Spalten und Zeilen bei einer 256x256-Matrix. Zur besseren Übersichtlichkeit wurde die angezeigte Skala auf 0-1 eingeschränkt}
 	\end{figure}
-\section{Nach der CUR-Zerlegung}
-	Für die exakte Wertefunktion $V$ gilt nach Bellmann, dass
-	\begin{eqnarray*}
-		V(x_k)&=&\inf_{u\in U^{\mathds{N}}}\{q(x_k,u)+V(f(x_k,u))\} \\
-			&=&q(x_k,u_k^*)+V(f(x_k,u_k^*))
-	\end{eqnarray*}
-	mit dem minimierenden $u_k^*$, falls das Optimum angenommen wird, wobei $V(f(x_k,u))=:V(x_{k+1})$. Da $q(x,u)>0 \hspace{1mm}$ für $x\neq 0$ gilt also insbesondere, dass $V(x_k)>V(x_{k+1})$. \newline
-	\newline
-	Mit dieser Eigenschaft wird die Wertefunktion zu einer \textbf{Lyapunov-Funktion} (siehe \citep{Wiggins1990}), da gilt:
-	\begin{enumerate}
-		\item $V(x)\geq 0$ 
-		\item $V(x)=0 \Leftrightarrow x=0$
-		\item $V(x_k)>V(x_{k+1})$
-	\end{enumerate}
-	Leider ergibt sich bei der approximativen $CUR$-Zerlegung $\tilde{V}$ das Problem, dass die Bedingung (iii) nicht 
-	mehr notwendigerweise erfüllt ist. \\
-	Für den resultieren Fehler berechnet man dazu das \textbf{Residuum} der Bellman-Gleichung. Dieses ist gegeben 
-	durch
-	\begin{equation}
-		R(x)=\tilde{V}(x)-\inf_{u}\{q(x,u)+\tilde{V}(f(x,u))\}.
-	\end{equation}
-	mit
-	\begin{equation}
-		\tilde{u}(x)=argmin_{u\in U^{\mathds{N}}}\{q(x,u)+\tilde{V}(f(x,u)\}
-	\end{equation}
-	Im Falle des Erfüllens der Bedingung (iii) ergibt sich
-	\begin{equation}
-		R(x)\geq 0 \hspace{1cm}\forall x\in X
-	\end{equation}
-	da $q(x,u)\geq0$ für alle $x\in X$. \\
-	Typischerweise ist diese Bedingung aber nicht für alle $x\in X$ erfüllt. Als alternative Formulierung soll 
-	deshalb die Menge $\bar{S}=\{x\in X| R(x)<0\}$ bezüglich des Lebesque-Maßes möglichst geringes Volumen besitzen.
-\section{Ausblick und Diskussion}
+	\newpage
+
+\section{Ausblick und Diskussion/Fazit}
+	In dieser Arbeit wurden verschiedene Approximationsmethoden vorgestellt und angewandt. Für ein besseres Ergebnis bei der Berechnung des Residuums könnte es hilfreich sein, die CUR-Zerlegung auf nicht-negative Matrizen $U$ einzuschränken. Hilfreiche Arbeiten in diesem Bereich könnten u.A. Hyvönen et al. \citep{NNCUR} liefern.
+	\end{comment}
 	\newpage
 \section*{Abkürzungen}
 	\begin{tabular}{ll}

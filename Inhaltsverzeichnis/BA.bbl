@@ -67,31 +67,37 @@
 \newblock A set oriented approach to optimal feedback stabilization.
 \newblock {In: }\emph{Systems {\&} control letters} 54 (2005), Nr. 2, S. 169
 
-\bibitem[10]{Junge2004}
+\bibitem[10]{NNCUR}
+\textsc{Hyvönen}, Saara ; \textsc{Miettinen}, Pauli  ; \textsc{Terzi},
+  Evimaria:
+\newblock Interpretable nonnegative matrix decompostions.
+\newblock {In: }\emph{Knowledge discovery and data mining (KDD)}  (2008)
+
+\bibitem[11]{Junge2004}
 \textsc{Junge}, O. ; \textsc{Osinga}, H.~M.:
 \newblock A set oriented approach to global optimal control.
 \newblock {In: }\emph{Control, optimisation and calculus of variations : COCV}
   10 (2004) (2004), S. 259--270
 
-\bibitem[11]{mahoney2008}
+\bibitem[12]{mahoney2008}
 \textsc{Mahoney}, Michael~W. ; \textsc{Drineasb}, Petros:
 \newblock CUR matrix decompositions for improved data analysis.
 \newblock {In: }\emph{PNAS} 2009 (2008), Nr. vol. 106, S. 697--702
 
-\bibitem[12]{penrose1955}
+\bibitem[13]{penrose1955}
 \textsc{Penrose}, Roger:
 \newblock A generalized inverse for matrices.
 \newblock {In: }\emph{Proceedings of the Cambridge Philosophical Society 51}
   (1955), S. 406--4013
 
-\bibitem[13]{Wang2013}
+\bibitem[14]{Wang2013}
 \textsc{Wang}, Shusen ; \textsc{Zang}, Zhihua:
 \newblock Improving CUR Matrix Decomposition and the Nystr{\"o}m Approximation
   via Adaptive Sampling.
 \newblock {In: }\emph{Journal of Machine Learning Research} 2013 (2013), Nr.
   14, S. 2729--2769
 
-\bibitem[14]{Wiggins1990}
+\bibitem[15]{Wiggins1990}
 \textsc{Wiggins}, Stephen:
 \newblock \emph{Introduction to applied nonlinear dynamical systems and chaos}.
 \newblock New York : Springer-Verlag, 1990

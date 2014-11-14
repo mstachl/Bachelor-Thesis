@@ -2,19 +2,21 @@
 \contentsline {section}{\numberline {1}Einf\IeC {\"u}hrung}{1}{section.1}
 \contentsline {section}{\numberline {2}Hintergrund und Motivation}{2}{section.2}
 \contentsline {subsection}{\numberline {2.1}Optimale Kontrolle}{2}{subsection.2.1}
-\contentsline {subsection}{\numberline {2.2}Berechnung der Wertefunktion}{2}{subsection.2.2}
-\contentsline {subsection}{\numberline {2.3}Beispiel: das invertierte Pendel}{3}{subsection.2.3}
-\contentsline {section}{\numberline {3}Niedring-Rang-Approximation einer Matrix}{5}{section.3}
-\contentsline {subsection}{\numberline {3.1}Singul\IeC {\"a}rwertzerlegung (SVD)}{5}{subsection.3.1}
-\contentsline {subsubsection}{\numberline {3.1.1}Definition}{5}{subsubsection.3.1.1}
-\contentsline {subsubsection}{\numberline {3.1.2}Fehlerapproximation}{6}{subsubsection.3.1.2}
-\contentsline {subsection}{\numberline {3.2}CUR-Zerlegung}{7}{subsection.3.2}
-\contentsline {subsubsection}{\numberline {3.2.1}Definition}{7}{subsubsection.3.2.1}
+\contentsline {subsection}{\numberline {2.2}Berechnung der Kostenfunktion}{3}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Beispiel: das invertierte Pendel}{4}{subsection.2.3}
+\contentsline {section}{\numberline {3}Niedrig-Rang-Approximation einer Matrix}{6}{section.3}
+\contentsline {subsection}{\numberline {3.1}Singul\IeC {\"a}rwertzerlegung (SVD)}{6}{subsection.3.1}
+\contentsline {subsubsection}{\numberline {3.1.1}Definition}{6}{subsubsection.3.1.1}
+\contentsline {subsubsection}{\numberline {3.1.2}Fehlerapproximation}{7}{subsubsection.3.1.2}
+\contentsline {subsection}{\numberline {3.2}CUR-Zerlegung}{8}{subsection.3.2}
+\contentsline {subsubsection}{\numberline {3.2.1}Definition}{8}{subsubsection.3.2.1}
 \contentsline {subsubsection}{\numberline {3.2.2}Zuf\IeC {\"a}llige Spaltenselektion auf Basis der Gleichverteilung}{8}{subsubsection.3.2.2}
 \contentsline {subsubsection}{\numberline {3.2.3}Spaltenselektion anhand des Leverage Scores}{9}{subsubsection.3.2.3}
 \contentsline {section}{\numberline {4}Berechnung der Residuen}{12}{section.4}
 \contentsline {subsection}{\numberline {4.1}Definition}{12}{subsection.4.1}
 \contentsline {subsection}{\numberline {4.2}Beispiel: Residuum der exakten Wertefunktion}{12}{subsection.4.2}
-\contentsline {section}{\numberline {5}Qualitativer Vergleich der Approximationsmethoden}{14}{section.5}
+\contentsline {section}{\numberline {5}Qualitativer Vergleich der Methoden in der optimalen Steuerung}{14}{section.5}
 \contentsline {subsection}{\numberline {5.1}Anwendung der Rang-k-Singul\IeC {\"a}rwertzerlegung}{14}{subsection.5.1}
 \contentsline {subsection}{\numberline {5.2}Anwendung der CUR-Zerlegung auf Basis der Gleichverteilung}{17}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}Anwendung der CUR-Zerlegung auf Basis des Leverage Scores}{20}{subsection.5.3}
+\contentsline {section}{\numberline {6}Fazit und Diskussion}{23}{section.6}

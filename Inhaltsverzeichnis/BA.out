@@ -1,9 +1,9 @@
 \BOOKMARK [1][-]{section.1}{Einf\374hrung}{}% 1
 \BOOKMARK [1][-]{section.2}{Hintergrund und Motivation}{}% 2
 \BOOKMARK [2][-]{subsection.2.1}{Optimale Kontrolle}{section.2}% 3
-\BOOKMARK [2][-]{subsection.2.2}{Berechnung der Wertefunktion}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.2}{Berechnung der Kostenfunktion}{section.2}% 4
 \BOOKMARK [2][-]{subsection.2.3}{Beispiel: das invertierte Pendel}{section.2}% 5
-\BOOKMARK [1][-]{section.3}{Niedring-Rang-Approximation einer Matrix}{}% 6
+\BOOKMARK [1][-]{section.3}{Niedrig-Rang-Approximation einer Matrix}{}% 6
 \BOOKMARK [2][-]{subsection.3.1}{Singul\344rwertzerlegung \(SVD\)}{section.3}% 7
 \BOOKMARK [3][-]{subsubsection.3.1.1}{Definition}{subsection.3.1}% 8
 \BOOKMARK [3][-]{subsubsection.3.1.2}{Fehlerapproximation}{subsection.3.1}% 9
@@ -14,6 +14,8 @@
 \BOOKMARK [1][-]{section.4}{Berechnung der Residuen}{}% 14
 \BOOKMARK [2][-]{subsection.4.1}{Definition}{section.4}% 15
 \BOOKMARK [2][-]{subsection.4.2}{Beispiel: Residuum der exakten Wertefunktion}{section.4}% 16
-\BOOKMARK [1][-]{section.5}{Qualitativer Vergleich der Approximationsmethoden}{}% 17
+\BOOKMARK [1][-]{section.5}{Qualitativer Vergleich der Methoden in der optimalen Steuerung}{}% 17
 \BOOKMARK [2][-]{subsection.5.1}{Anwendung der Rang-k-Singul\344rwertzerlegung}{section.5}% 18
 \BOOKMARK [2][-]{subsection.5.2}{Anwendung der CUR-Zerlegung auf Basis der Gleichverteilung}{section.5}% 19
+\BOOKMARK [2][-]{subsection.5.3}{Anwendung der CUR-Zerlegung auf Basis des Leverage Scores}{section.5}% 20
+\BOOKMARK [1][-]{section.6}{Fazit und Diskussion}{}% 21

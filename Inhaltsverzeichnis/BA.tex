@@ -108,9 +108,12 @@ Garching, den
 \newpage
 %%%% Zusammenfassung in englischer Sprache
 \section*{Summary}
-Bei einer in deutscher Sprache verfassten Arbeit muss eine Zusammenfassung in englischer Sprache vorangestellt werden.
-Daf"ur ist hier Platz.
-
+Big Data has shown great opportunities and significant impact on our current landscape. Therefore gaining information is no longer an issue to battle with, instead storing and accessing the right data is. Unfortunately the growth of computational power cannot compete with the increasing amount of data. For this reason, it is necessary to gain information on all the data by only examining a finite subset of the entire data. This is what initiates this thesis. \\
+Information, e.g. on optimal control of an unstable system, stored as a matrix should be regained or (spoken in terms of matrices) reconstructed by a suitable algorithm that uses a finite number of vectors. Ideally this number is notably smaller than the range of the matrix. Beside the well-known method of the Singular Value Decomposition (SVD), a relatively new procedure, so-called CUR-decomposition, will also be introduced in this paper.
+\\
+This method of matrix approximation tries to reconstruct the matrix by using a relatively small number of actual rows and columns of the target matrix. The selection of rows and columns for approximation is decided by a probability distribution. This paper provides two different versions of the CUR-decomposition: the first uses the uniform distributionn to decide, which matrix elements are selected, while the second algorithm is based on a statistical value, the so-called leverage score. \\
+With those three methods, experiments will be conducted and the results compared categorically.
+Finally, an analysis on the experimental outcome will be made and a demonstrative conclusion provided.
 \newpage
 \tableofcontents
 \newpage
@@ -120,25 +123,28 @@ Daf"ur ist hier Platz.
 \pagestyle{headings}
 
 \section{Einführung}
-	Seit einigen Jahrzehnten befinden wir uns in einer Gesellschaft, in der wir freien Zugang zu aller Arten von 
-	Informationen haben. Durch Wissens-Datenbanken wie Wikipedia wird jedem der Zugriff zu Spezialwissen verschiedenster Themen ermöglicht und jeder Experte kann sein eigenes Know-How inserieren und somit verbreiten.
+%	Seit einigen Jahrzehnten befinden wir uns in einer Gesellschaft, in der wir freien Zugang zu aller Arten von 
+%	Informationen haben. Durch Wissens-Datenbanken wie Wikipedia wird jedem der Zugriff zu Spezialwissen verschiedenster Themen ermöglicht und jeder Experte kann sein eigenes Know-How inserieren und somit verbreiten.
 %	 Durch die Entwicklung von Suchmaschinen wie Google und Yahoo wird der Zugriff auf diese Quellen erleichtert. 
 %	Durch den stetigen Upload an Daten steht die Informationstheorie vor einem neuen Problem: how to handle Big Data.
 %	Laut einer Studie der \textit{pcwelt} hat die Menschheit bis zum Jahre 2013 über 2 Zettabyte (Zetta = $10^{21}$) Daten produziert und gespeichert.
-	\\
-	In diesem Informationszeitalter liegt das Augenmerk nicht 
-	mehr auf der Informationsbeschaffung, sondern auf der Speicherung dieser Informationen und der Erleichterung des 
-	Zugriffs auf diese. \\
+%	In Zeiten, die von dem Begriff \textit{Big Data} geprägt werden, liegt das Augenmerk der Benutzer
+%	In diesem Informationszeitalter 
+%	liegt das Augenmerk nicht 
+%	nicht mehr auf der Informationsbeschaffung, sondern auf deren Speicherung und der Erleichterung des 
+%	Zugriffs auf diese.
+	Big Data hat einen bedeutenden Einfluss auf die heutige Gesellschaft. Aus diesem Grund steht man nicht mehr von dem Problem der Informationsbeschaffung, sondern dem Aspekt der Speicherung von Information und der Erleichterung des Zugriffs auf diese.
 	Leider nimmt die Leistungsfähigkeit der Rechner nicht in demselben Maße zu wie die Menge an Daten. Aus diesem 
-	Grund ist es notwendig, durch die Untersuchung einer finiten Teilmenge des Ganzen genügend Informationen zu 
-	sammeln, um damit Rückschlüsse auf die Gesamtheit ziehen zu können. \\
-	An dieser Stelle setzt diese Arbeit ein. Ist Information, beispielsweise zu den optimalen Kosten zur Stabilisierung eines instabilen Systems, in Form einer Matrix gegeben, so soll aus einer finiten Anzahl an Vektoren, die idealerweise viel kleiner ist als der Rang der Zielmatrix, in Kombination mit einem Algorithmus die ursprüngliche Matrix möglichst genau wiederhergestellt werden. Bevorzugt wird dabei ein Algorithmus mit geringen Berechnungskosten.
-	Neben der gängigen Methode der Singulärwertzerlegung (kurz SVD, von engl. \textit{singular value decomposition}), welche leider einige Limitierungen durch die hohen Berechnungskosten besitzt, wird in der vorliegenden Arbeit ein relativ junges Verfahren vorgestellt, die sogenannte CUR-Zerlegung. \\
+	Grund ist es notwendig, durch die Untersuchung einer finiten Teilmenge der Daten genügend Informationen zu 
+	sammeln, um damit Rückschlüsse auf die Gesamtheit ziehen zu können. Dies begründet die Anfertigung dieser Arbeit.\\
+	Ist Information, beispielsweise zur optimalen Steuerung eines instabilen Systems, in Form einer Matrix gegeben, so soll mithilfe eines passenden Algorithmus' aus einer finiten Anzahl an Vektoren die ursprüngliche Matrix möglichst genau wiederhergestellt werden.
+	Idealerweise ist diese Zahl viel kleiner ist als der Rang der Zielmatrix.
+	Neben der gängigen Methode der Singulärwertzerlegung (kurz SVD, von engl. \textit{Singular Value Decomposition}) wird in der vorliegenden Arbeit ein relativ junges Verfahren vorgestellt, die sogenannte CUR-Zerlegung.
 	Bei dieser Methode zur Rekonstruktion einer Matrix wird versucht, die Zielmatrix mithilfe einer geringen Anzahl 
 	an Zeilen und Spalten derselben Matrix wiederherzustellen. Welche Zeilen bzw. Spalten dabei zur Approximation 
 	verwendet werden, wird zufällig über eine Wahrscheinlichkeitsverteilung entschieden. Folgend werden zwei 
 	verschiedene Varianten dieses Verfahrens eingeführt: die erste Version beruht auf der Gleichverteilung der einzelnen Selektionswahrscheinlichkeiten, die zweite auf der Selektion basierend auf einem statistischen Einflusswerte, dem Leverage Score. \\
-	Zu den verschiedenen Approximierungsmethoden werden Experimente durchgeführt und die Simulationsergebnisse
+	Zu den drei verschiedenen Approximierungsmethoden werden Experimente durchgeführt und die Simulationsergebnisse
 	anhand diverser Kategorien miteinander verglichen. Abschließend wird ein aussagekräftiges Fazit abgegeben.
 	\newpage
 \section{Hintergrund und Motivation}
@@ -594,11 +600,11 @@ $X$ und $U$ sind dabei jeweils kompakte Teilmengen der zugrunde liegenden
 	es aber in den folgenden Experimenten und konzentrieren uns auf den stabilisierbaren Bereich $S$.
 	\newpage
 \section{Qualitativer Vergleich der Methoden in der optimalen Steuerung}
-Im Folgenden werden einige Experimente zu den verschiedenen Methoden zur Rekonstruktion der Zielmatrix durchgeführt. Als Vergleichsobjekt dient dabei die Matrix der nötigen Kosten zur Stabilisierung eines inversen Pendels. Die Ergebnisse wurden mithilfe des graphentheoretischen Ansatzes von Grüne und Junge \citep{Grune2005} in Matlab\footnote{Verwendet wurde das Software-Paket GAIO$^\copyright$	 - Global Analysis of Invariant Objects für Matlab} bei Simulationstiefe 14 - entspricht einer resultierenden Kostenmatrix $V\in\mathds{R}^{128\times 128}$ - erstellt. Die Verfahren werden in Hinblick auf Konvergenzgeschwindigkeit, Akkuratesse, Standort der größten Fehler und das Residuum verglichen.
+Im Folgenden werden einige Experimente zu den verschiedenen Methoden zur Rekonstruktion der Zielmatrix durchgeführt. Als Vergleichsobjekt dient dabei die Matrix der nötigen Kosten zur Stabilisierung eines inversen Pendels. Die Ergebnisse wurden mithilfe des graphentheoretischen Ansatzes von Grüne und Junge \citep{Grune2005} in Matlab\footnote{Verwendet wurde das Software-Paket GAIO$^\copyright$	 - Global Analysis of Invariant Objects für Matlab} bei Simulationstiefe 14 - entspricht einer resultierenden Kostenmatrix $V\in\mathds{R}^{128\times 128}$ - erstellt. Die Verfahren werden in Hinblick auf Konvergenzgeschwindigkeit, Standort der größten Fehler und das Residuum verglichen.
 \subsection{Anwendung der Rang-k-Singulärwertzerlegung}
 In Kapitel \ref{sec:SVD} wurde bereits festgestellt, dass die Singulärwertzerlegung die beste Rang-$k$-Annäherung einer Matrix $V$ bezüglich der Frobenius- bzw. Spektralnorm liefert. Leider beinhaltet dieses Faktum keine a-priori-Informationen, wie sich die Fehler in einem bestimmten Bereich der Matrix verhalten. \\
 Aus diesem Grund werden folgend einige experimentelle Beobachtungen geliefert, die Rückschlüsse auf diese fehlenden Informationen geben sollen. 
-\subsubsection*{Akkuratesse und Konvergenz}
+\subsubsection*{Konvergenz}
 \begin{figure}[h]
 	
 	\centering
@@ -638,7 +644,7 @@ Für die positive Bewertung eines Verfahrens bezüglich des Residuums ist aussch
 \label{sec:gleichv}
 Die CUR-Zerlegung auf Basis der gleichverteilten Index-Wahrscheinlichkeiten ist ein Verfahren, welches als Grundlage nicht die die Singulärwertzerlegung verwendet. Auf diesem Faktum beruht die Eigenschaft dieser Zerlegung, wie bereits in Kapitel \ref{sec:glv} festgestellt, dass sich im Vergleich zur Singulärwertzerlegung einige Berechnungskosten einsparen lassen. In den durchgeführten Experimenten wurden quadratische Matrizen verwendet, sowie die ausgewählten Indizes für Zeilen und Spalten der Matrizen simultan berechnet. Daher verringern sich die benötigten Kosten zur Berechnung zu $\mathcal{O}(l+m)$, wobei $l$ die Anzahl der selektierten Indizes und $m$ die Anzahl an Zeilen respektive Spalten der Zielmatrix symbolisieren.\\
 Nun gilt es zu verifizieren, inwiefern sich diese Kostenersparnis auf die Qualität der Ergebnisse auswirkt, bzw. ob die gewünschten Eigenschaften weiterhin erfüllt werden.
-	\subsubsection*{Akkuratesse und Konvergenz}
+	\subsubsection*{Konvergenz}
 	Bei der Simulation der CUR-Zerlegung fällt zunächst auf, dass bei der Auswahl einer sehr geringen Anzahl an 
 	Zeilen die innere Struktur der Matrix verloren geht. Wie in Abbildung \ref{pic:randCUR} (A) zu sehen hat die 
 	resultierende Matrix bei der Auswahl von 10 Zeilen und Spalten kaum Ähnlichkeit mit der strudelförmigen Darstellung des Originals (vgl. \ref{pic:Vapp}).
@@ -693,7 +699,7 @@ Werden 20 oder weniger Spalten und Zeilen selektiert, so gibt es weit verbreitet
 	Spalten sehr stark variieren. Aus diesem Grund wurden Berechnungen mit unterschiedlichen Variationen dieser 
 	Methode durchgeführt. \newline
 	Die besten Ergebnisse wurden mit der Methode \textit{ortho.top.scores} erreicht (vgl. \citep{bodor2012}). Bei dieser Variation des Algorithmus' werden die Spalten und Zeilen aufgrund der Linearkombination aus Einflusswert und "maximaler Orthogonalität" der Spalten bzw. Zeilen zueinander ausgewählt.
-	\subsubsection*{Akkuratesse und Konvergenz}
+	\subsubsection*{Konvergenz}
 	Da bei dieser Art der CUR-Zerlegung die Zeilen und Spalten nicht rein zufällig und auf Basis der Gleichverteilung ausgewählt werden, wie etwa in dem zuvor vorgestellten Verfahren, sondern der Auswahl eine statistische Verteilung - \textit{Leverage Score} - zugrunde liegt, ist zu erwarten, dass die Qualität der Approximation zwischen der der Singulärwertzerlegung und der von \textit{randCUR} liegt. In der Tat liegt der Fehler $Err=V-\tilde{V}$ bezüglich der Frobeniusnorm leicht unter dem des auf der Gleichverteilung basierenden Verfahrens (vgl. Abbildung \ref{CURortho_vf} rechts).
 	\begin{figure}[h]
 		\center
@@ -735,8 +741,8 @@ Werden 20 oder weniger Spalten und Zeilen selektiert, so gibt es weit verbreitet
 %		\item hohe Berechnunskosten ok $\rightarrow$ SVD
 %		\item geringe Berechnungskosten, dafür mehr Spalten zur Approximation ok $\rightarrow$ randCUR
 %	\end{itemize}
-In dieser Arbeit wurden verschiedene Methoden zur Approximation von Matrizen dargestellt. Neben der klassischen Methode der Singulärwertzerlegung wurden auch zwei Varianten des relativen jungen Verfahrens der CUR-Zerlegung vorgestellt. \\
-	Experimente mit den vorgestellten Methoden zur Niedrig-Rang-Approximationen von Matrizen haben ergeben, dass sie sich in diversen Aspekten unterscheiden. Während die Singulärwertzerlegung durch ihre schnelle Konvergenz und guten Eigenschaften bezüglich Lokalisation der Fehler und des Residuums glänzt, zeigt die CUR-Zerlegung mit einem auf der Gleichverteilung der Selektions-Wahrscheinlichkeiten basierenden Algorithmus ihre Stärken vor allem in den sehr geringen Berechnungskosten bei geringer Verschlechterung des Simulationsergebnisses. Die zweite Variante der CUR-Zerlegung, welche zur Auswahl der Selektions-Indizes einen statistischen Wert zum Ranking verwendet, schneidet dabei leider in beiden Bereichen, Kosten und Qualität, eher ungenügend ab. \\
+In dieser Arbeit wurden verschiedene Methoden zur Approximation von Matrizen dargestellt. Neben der klassischen Methode der Singulärwertzerlegung wurden vor allem zwei mögliche Varianten des relativen jungen Verfahrens der CUR-Zerlegung diskutiert. \newline
+	Experimente mit den vorgestellten Methoden zur Niedrig-Rang-Approximationen von Matrizen haben ergeben, dass sie sich in diversen Aspekten unterscheiden. Die Singulärwert-zerlegung, als die ''beste'' Rang-k-Approximierung, glänzt vor allem durch ihre schnelle Konvergenz und die guten Eigenschaften bezüglich Lokalisation der Fehler und des Residuums. Während die SVD aber Beschränkungen in den Berechnungskosten aufweist, zeigt gerade dort die CUR-Zerlegung mit einem auf der Gleichverteilung der Selektions-Wahrscheinlichkeiten basierenden Algorithmus ihre Stärken bei nur geringer Verschlechterung des Simulationsergebnisses. Die zweite Variante der CUR-Zerlegung, welche zur Auswahl der Selektions-Indizes einen statistischen Wert zum Ranking verwendet, schneidet dabei leider in beiden Bereichen, Kosten und Qualität, eher ungenügend ab. \\
 	Welches Verfahren verwendet wird, muss allgemein im Einzelfall entschieden werden. Fordern die zugrunde liegenden Daten auch bei geringem Approximations-Rang ein sehr großes Maß an Genauigkeit, so gibt es derzeit keinen Weg an der klassischen Lösung der Singulärwertzerlegung vorbei und die hohen Berechnungskosten werden akzeptiert werden müssen. Steht allerdings die Einsparung an Berechnungskosten im Vordergrund, so sollte auf die zufällige CUR-Approximation verwiesen werden. Das etwas schlechtere Ergebnis bezüglich der Qualität kann dabei eventuell durch die Hinzunahme weiterer Spalten ausgeglichen werden.
 	
 	\newpage
